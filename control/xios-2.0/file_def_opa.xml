@@ -10,10 +10,10 @@
 <file_definition type="multiple_file" name="@expname@_@freq@_@startdate@_@enddate@" sync_freq="1d" min_digits="4">
 
   <file_group id="2h" output_freq="2h"  output_level="10" enabled=".TRUE."/> <!-- 2h files -->
+  <file_group id="3h" output_freq="3h"  output_level="10" enabled=".TRUE." /> <!-- 3h files -->
+  <file_group id="4h" output_freq="4h"  output_level="10" enabled=".TRUE."/> <!-- 4h files -->
 
-
-
-  <file_group id="3h" output_freq="3h"  output_level="10" enabled=".TRUE." > <!-- 3h files -->
+  <file_group id="6h" output_freq="6h" split_freq="1mo" output_level="10" enabled=".TRUE."> <!-- 6h files -->
 
     <!-- ########    T-GRID    ########  -->
     <file id="file1" name_suffix="_gridT-OPA" description="ocean T grid variables" >
@@ -25,10 +25,10 @@
       <field field_ref="rhop"         name="rhop_sig0"      long_name="potential density (sigma0)"                        />
       <field field_ref="botpres"      name="botpres"        long_name="Pressure at sea floor"                             />
 
-      <variable name="start_date"       type="int">19590101    </variable>
-      <variable name="output_frequency" type="string">1m       </variable>
-      <variable name="CONFIG"           type="string">CREG025.L75 </variable>
-      <variable name="CASE"             type="string">BCTGE27SSSICE   </variable>
+      <variable name="start_date"       type="int">19950101         </variable>
+      <variable name="output_frequency" type="string">6h            </variable>
+      <variable name="CONFIG"           type="string">CREG025   </variable>
+      <variable name="CASE"             type="string">ILBOX00 </variable>
     </file>
 
     <!-- ########    U-GRID    ########  -->
@@ -41,10 +41,10 @@
           <field field_ref="uwspd10"      name="uwspd10"        long_name="U wind speed at 10m" />
       -->
 
-      <variable name="start_date"       type="int">19590101    </variable>
-      <variable name="output_frequency" type="string">1m       </variable>
-      <variable name="CONFIG"           type="string">CREG025.L75 </variable>
-      <variable name="CASE"             type="string">BCTGE27SSSICE   </variable>
+      <variable name="start_date"       type="int">19950101    </variable>
+      <variable name="output_frequency" type="string">6h       </variable>
+      <variable name="CONFIG"           type="string">CREG025 </variable>
+      <variable name="CASE"             type="string">ILBOX00   </variable>
     </file>
 
     <!-- ########    V-GRID    ########  -->
@@ -57,10 +57,10 @@
           <field field_ref="vwspd10"      name="vwspd10"        long_name="V wind speed at 10m" />
       -->
 
-      <variable name="start_date"       type="int">19590101    </variable>
-      <variable name="output_frequency" type="string">1m       </variable>
-      <variable name="CONFIG"           type="string">CREG025.L75 </variable>
-      <variable name="CASE"             type="string">BCTGE27SSSICE   </variable>
+      <variable name="start_date"       type="int">19950101    </variable>
+      <variable name="output_frequency" type="string">6h       </variable>
+      <variable name="CONFIG"           type="string">CREG025 </variable>
+      <variable name="CASE"             type="string">ILBOX00   </variable>
     </file>
 
     <!-- ########    W-GRID    ########  -->
@@ -70,18 +70,18 @@
       <field field_ref="avs"          name="votkeavs"       long_name="ocean_vertical_salt_diffusivity" />
       <field field_ref="avm"          name="avm"            long_name="vertical eddy viscosity"         />
 
-      <variable name="start_date"       type="int">19590101    </variable>
-      <variable name="output_frequency" type="string">1m       </variable>
-      <variable name="CONFIG"           type="string">CREG025.L75 </variable>
-      <variable name="CASE"             type="string">BCTGE27SSSICE   </variable>
+      <variable name="start_date"       type="int">19950101    </variable>
+      <variable name="output_frequency" type="string">6h       </variable>
+      <variable name="CONFIG"           type="string">CREG025 </variable>
+      <variable name="CASE"             type="string">ILBOX00   </variable>
     </file>
 
     <!-- ########    FLXT-GRID    ########  -->
     <file id="file5" name_suffix="_flxT-OPA" description="surface fluxes variables" > <!-- time step automaticaly defined based on nn_fsbc -->
       <field field_ref="empmr"        name="empmr"      long_name="water_flux_into_sea_water"                     />
-      <field field_ref="emp_oce"      name="emp_oce"    long_name="Evap minus Precip over ocean"                  />
       <field field_ref="snowpre"      name="snowpre"    long_name="Snow precipitation"                            />
       <field field_ref="runoffs"      name="runoffs"    long_name="River Runoffs"                                 />
+      <field field_ref="saltflx"      name="sfx"        long_name="salt flux total"                               />
 
       <field field_ref="qt"           name="qt"         long_name="Net Downward Heat Flux"                        />
       <field field_ref="qns"          name="nshfls"     long_name="surface_net_downward_non_solar_flux" level="1" />
@@ -90,25 +90,10 @@
       <field field_ref="taum"         name="taum"       long_name="wind stress module"                            />
       <field field_ref="wspd"         name="windsp"     long_name="wind speed module"                             />
 
-      <field field_ref="qlw_oce"       name="qlw_oce"    long_name="Longwave Downward Heat Flux over open ocean"  />
-      <field field_ref="qsb_oce"       name="qsb_oce"    long_name="Sensible Downward Heat Flux over open ocean"  />
-      <field field_ref="qla_oce"       name="qla_oce"    long_name="Latent Downward Heat Flux over open ocean"    />
-      <field field_ref="qemp_oce"      name="qemp_oce"   long_name="Downward Heat Flux from E-P over open ocean"  />
-      <field field_ref="qemp_ice"      name="qemp_ice"   long_name="Downward Heat Flux from E-P over ice"         />
-      <field field_ref="taum_oce"      name="taum_oce"   long_name="wind stress module over open ocean"           />
-
-      <field field_ref="qsr_oce"      name="qsr_oce"    long_name="downward shortwave flux at ocean surface"      />
-      <field field_ref="qsr_ice"      name="qsr_ice"    long_name="downward shortwave flux at ice surface"        />
-      <field field_ref="qns_oce"      name="qns_oce"    long_name="downward non solar flux at ocean surface"      />
-      <field field_ref="qns_ice"      name="qns_ice"    long_name="downward non solar flux at ice surface"        />
-      <field field_ref="qt_oce"       name="qt_oce"     long_name="downward total flux at ocean surface"          />
-      <field field_ref="qt_ice"       name="qt_ice"     long_name="downward total flux at ice surface"            />
-      <field field_ref="qtr_ice"      name="qtr_ice"    long_name="shortwave flux transmitted through the ice"    />
-
-      <variable name="start_date"       type="int">19590101    </variable>
-      <variable name="output_frequency" type="string">1m       </variable>
-      <variable name="CONFIG"           type="string">CREG025.L75 </variable>
-      <variable name="CASE"             type="string">BCTGE27SSSICE   </variable>
+      <variable name="start_date"       type="int">19950101    </variable>
+      <variable name="output_frequency" type="string">6h       </variable>
+      <variable name="CONFIG"           type="string">CREG025 </variable>
+      <variable name="CASE"             type="string">ILBOX00   </variable>
     </file>
 
 
@@ -118,14 +103,10 @@
 
 
 
-  <file_group id="4h" output_freq="4h"  output_level="10" enabled=".TRUE."/> <!-- 4h files -->
-  <file_group id="6h" output_freq="6h"  output_level="10" enabled=".TRUE."/> <!-- 6h files -->
+
+
+
   <file_group id="1d" output_freq="1d"  output_level="10" enabled=".TRUE."/> <!-- 1d files -->
-
-
-
-
-
 
   <file_group id="1mo" output_freq="1mo" output_level="10" enabled=".TRUE."/> <!-- real monthly files -->
 

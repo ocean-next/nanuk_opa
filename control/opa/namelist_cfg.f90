@@ -41,6 +41,10 @@
    nn_istate   =   0    !  output the initial state (1) or not (0)
    nn_stock    =   480   !5d at dt=900  frequency of creation of a restart file (modulo referenced to 1)
    nn_write    =   480   !5d at dt=900  frequency of write in the output file   (modulo referenced to nn_it000)
+!   nn_stock    =   2880   !30d at dt=900  frequency of creation of a restart file (modulo referenced to 1)
+!   nn_write    =   2880   !30d at dt=900  frequency of write in the output file   (modulo referenced to nn_it000)
+!   nn_stock    =   35040   !1Y at dt=900  frequency of creation of a restart file (modulo referenced to 1)
+!   nn_write    =   35040   !1Y at dt=900  frequency of write in the output file   (modulo referenced to nn_it000)
    ln_dimgnnn  = .false.   !  DIMG file format: 1 file for all processors (F) or by processor (T)
    ln_mskland  = .false.   !  mask land points in NetCDF outputs (costly: + ~15%)
    ln_cfmeta   = .false.   !  output additional data to netCDF files required for compliance with the CF metadata standard
@@ -95,7 +99,7 @@
    nn_bathy    =    1      !  compute (=0) or read (=1) the bathymetry file
    rn_bathy    =    0.     !  value of the bathymetry. if (=0) bottom flat at jpkm1
    nn_closea   =    0      !  remove (=0) or keep (=1) closed seas and lakes (ORCA)
-   nn_msh      =    1      !  create (=1) a mesh file or not (=0)
+   nn_msh      =    0      !  create (=1) a mesh file or not (=0)
    rn_hmin     =   -3.     !  min depth of the ocean (>0) or min number of ocean level (<0)
    rn_e3zps_min=   25.     !  partial step thickness is set larger than the minimum of
    rn_e3zps_rat=    0.2    !  rn_e3zps_min and rn_e3zps_rat*e3t, with 0<rn_e3zps_rat<1
@@ -742,9 +746,9 @@
                            !  buffer blocking send or immediate non-blocking sends, resp.
    nn_buffer   =   0       !  size in bytes of exported buffer ('B' case), 0 no exportation
    ln_nnogather=  .false.  !  activate code to avoid mpi_allgather use at the northfold
-   jpni        =   9  !  jpni   number of processors following i (set automatically if < 1)
-   jpnj        =   18  !  jpnj   number of processors following j (set automatically if < 1)
-   jpnij       =   135 !  jpnij  number of local domains (set automatically if < 1)
+   jpni        =   12  !  jpni   number of processors following i (set automatically if < 1)
+   jpnj        =   5  !  jpnj   number of processors following j (set automatically if < 1)
+   jpnij       =   54 !  jpnij  number of local domains (set automatically if < 1)
 /
 !-----------------------------------------------------------------------
 &namctl        !   Control prints & Benchmark
