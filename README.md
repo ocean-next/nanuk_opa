@@ -12,4 +12,11 @@ So why is it there then? Well, just for us to make sure we are really using the 
 - ```sources/MY_SRC``` this is where all NEMO sources that differ from what is found into ```sources/NEMOGCM_3.6r7088``` should reside. So there are here all the specific changes specific to Claude/Camille old CREG4 setup + all NANUK-specific tweaks...
 
 
-```control/```: contains namelists and xml files for OPA and XIOS.
+```control/```: contains namelists and xml files for OPA and XIOS and OASIS.
+
+-  ```control/opa``` contains namelists for OPA
+
+- ```control/xios-2.0``` contains xml XIOS files for ocean fields output control
+
+- ```control/oasis``` contains the "namcouple" OASIS namelist
+
