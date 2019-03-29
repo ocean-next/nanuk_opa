@@ -25,6 +25,9 @@ MODULE sbcssr
    USE timing         ! Timing
    USE shapiro         ! used in case of ln_sssr_flt
    USE lib_fortran    ! Fortran utilities (allows no signed zero when 'key_nosignedzero' defined)  
+!CT add the function to compute frezing point {
+   USE eosbn2         ! equation of state
+!CT add the function to compute frezing point }
 
    IMPLICIT NONE
    PRIVATE
@@ -97,6 +100,7 @@ CONTAINS
       REAL(wp) , DIMENSION (jpi,jpj) :: zsss_m    ! temporary array
 !CT CREG {
       REAL(wp) , DIMENSION (jpi,jpj) :: zsssr_ice ! temporary array
+      REAL(wp) , DIMENSION (jpi,jpj) :: zt_fzp    ! temporary array
 !CT CREG }
       !}
       !!
@@ -110,6 +114,12 @@ CONTAINS
          !
          IF( nn_sstr == 1)   CALL fld_read( kt, nn_fsbc, sf_sst )   ! Read SST data and provides it at kt
          IF( nn_sssr >= 1)   CALL fld_read( kt, nn_fsbc, sf_sss )   ! Read SSS data and provides it at kt
+
+!CT Read climatological temparature to avoid SSS restoring in areas where it is close to the freezing point {
+         IF ( .NOT. ln_sssr_ice) THEN
+             CALL fld_read( kt, nn_fsbc, sf_sst )   ! Read SST data and provides it at kt
+         ENDIF
+!CT Read climatological temparature to avoid SSS restoring in areas where it is close to the freezing point }
          !
          !                                         ! ========================= !
          IF( MOD( kt-1, nn_fsbc ) == 0 ) THEN      !    Add restoring term     !
@@ -156,6 +166,9 @@ CONTAINS
                IF ( .NOT. ln_sssr_ice ) THEN
                    WHERE( fr_i(:,:) > 0._wp ) zsssr_ice(:,:) = 0._wp
                ENDIF 
+               ! Avoid SSS damping in areas where climatology has negative temperature, i.e. with potential sea-ice  
+               CALL eos_fzp( sf_sss(1)%fnow(:,:,1), zt_fzp(:,:) )
+               WHERE( sf_sst(1)%fnow(:,:,1) <= zt_fzp(:,:) ) zsssr_ice(:,:) = 0._wp
 !CT CREG turn on/off damping under sea-ice } 
 
                DO jj = 1, jpj
@@ -243,7 +256,13 @@ CONTAINS
          WRITE(numout,*) '      Limit sss restoring near the coast     ln_sssr_msk = ', ln_sssr_msk
          IF ( ln_sssr_msk ) WRITE(numout,*) '      Decaying lenght scale from the coast   rn_dist     = ', rn_dist, ' km'
          WRITE(numout,*) '      Apply SSS restoring under Sea-ice       ln_sssr_ice  = ', ln_sssr_ice
+!CT  start {
+         IF ( .NOT. ln_sssr_ice) THEN
+             WRITE(numout,*) '                      Avoid SSS restoring under sea-ice and in areas where climatology T is close to freezing point'
+         ENDIF
+!CT  end }
       ENDIF
+
       !
       !                            !* Allocate erp and qrp array
       ALLOCATE( qrp(jpi,jpj), erp(jpi,jpj), STAT=ierror )
@@ -274,6 +293,20 @@ CONTAINS
          CALL fld_fill( sf_sss, (/ sn_sss /), cn_dir, 'sbc_ssr', 'SSS restoring term toward SSS data', 'namsbc_ssr' )
          IF( sf_sss(1)%ln_tint )   ALLOCATE( sf_sss(1)%fdta(jpi,jpj,1,2), STAT=ierror )
          IF( ierror > 0 )   CALL ctl_stop( 'STOP', 'sbc_ssr: unable to allocate sf_sss data array' )
+         !
+!CT Required to avoid SSS restoring in areas where climatology temperature is close to the freezing point }
+         IF ( .NOT. ln_sssr_ice) THEN
+             ALLOCATE( sf_sst(1), STAT=ierror )
+             IF( ierror > 0 )   CALL ctl_stop( 'STOP', 'sbc_ssr: unable to allocate sf_sst structure' )
+             ALLOCATE( sf_sst(1)%fnow(jpi,jpj,1), STAT=ierror )
+             IF( ierror > 0 )   CALL ctl_stop( 'STOP', 'sbc_ssr: unable to allocate sf_sst now array' )
+             !
+             ! fill sf_sst with sn_sst and control print
+             CALL fld_fill( sf_sst, (/ sn_sst /), cn_dir, 'sbc_ssr', 'SST restoring term toward SST data', 'namsbc_ssr' )
+             IF( sf_sst(1)%ln_tint )   ALLOCATE( sf_sst(1)%fdta(jpi,jpj,1,2), STAT=ierror )
+             IF( ierror > 0 )   CALL ctl_stop( 'STOP', 'sbc_ssr: unable to allocate sf_sst data array' )
+         ENDIF
+!CT Required to avoid SSS restoring in areas where climatology temperature is close to the freezing point }
          !
          ! if masking of coastal area is used
          IF ( ln_sssr_msk ) THEN

@@ -56,10 +56,8 @@ MODULE zdftke
    USE agrif_opa_interp
    USE agrif_opa_update
 #endif
-#if defined key_lim3
 ! VH 13/03/2017 to get ice thicknesses
-   USE ice, ONLY: ht_i
-#endif
+!CT We don't use this for the Ice twin experiemnts   USE ice, ONLY: ht_i
 
 
    IMPLICIT NONE
@@ -587,16 +585,14 @@ CONTAINS
          zmxlm(:,:,1) = rn_mxl0
       ENDIF
       !
-#if defined key_lim3
 ! next 6 lines proposed by Gurvan to increase surface mixing under ice. VH 13/03/2017      
-      zhice_max = MAXVAL(ht_i,3)
-      DO jj = 2, jpjm1
-         DO ji = fs_2, fs_jpim1
-            zmxlm(ji,jj,1) = MAX( zmxlm(ji,jj,1) , fr_i(ji,jj) * zhice_max(ji,jj) )
-         END DO
-      END DO
+!CT We don't use this for the Ice twin experiemnts       zhice_max = MAXVAL(ht_i,3)
+!CT We don't use this for the Ice twin experiemnts       DO jj = 2, jpjm1
+!CT We don't use this for the Ice twin experiemnts          DO ji = fs_2, fs_jpim1
+!CT We don't use this for the Ice twin experiemnts             zmxlm(ji,jj,1) = MAX( zmxlm(ji,jj,1) , fr_i(ji,jj) * zhice_max(ji,jj) )
+!CT We don't use this for the Ice twin experiemnts          END DO
+!CT We don't use this for the Ice twin experiemnts       END DO
       !
-#endif
 !CDIR NOVERRCHK
       DO jk = 2, jpkm1              ! interior value : l=sqrt(2*e/n^2)
 !CDIR NOVERRCHK
