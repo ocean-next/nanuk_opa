@@ -4,7 +4,7 @@ Sources, namelists, xml files for the OPA setup of NANUK, based on version 3.6 o
 
 ## Structure
 
-```sources/```: contains only NEMO F90 source files.
+```sources/```: contains only NEMO F90 source files
 
 -  ```sources/NEMOGCM_3.6r7088``` contains the reference NEMOGCM distribution. There is no reason to modify anything in here! This is supposed to be frozen forever!!!
 So why is it there then? Well, just for us to make sure we are really using the same background NEMO distro. It's easy to make a "diff" between this directory and the one you are using! 
@@ -20,3 +20,9 @@ So why is it there then? Well, just for us to make sure we are really using the 
 
 - ```control/oasis``` contains the "namcouple" OASIS namelist
 
+
+```compile/```: contains relevant files needed to compile OPA.
+
+- ```compile/ARCH``` contains relevant "architecture files" for compilation on different HPC systems.
+
+- ```compile/cpp_\<CONFIG\>_OPA.fcm``` contains the CPP keys for a given (domain) configuration
