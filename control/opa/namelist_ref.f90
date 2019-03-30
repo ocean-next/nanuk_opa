@@ -4,7 +4,7 @@
 !!              3 - Surface boundary (namsbc, namsbc_ana, namsbc_flx, namsbc_clio, namsbc_core, namsbc_sas
 !!                                    namsbc_cpl, namtra_qsr, namsbc_rnf,
 !!                                    namsbc_apr, namsbc_ssr, namsbc_alb)
-!!              4 - lateral boundary (namlbc, namcla, namagrif, nambdy, nambdy_tide)
+!!              4 - lateral boundary (namlbc, namcla, namobc, namagrif, nambdy, nambdy_tide)
 !!              5 - bottom  boundary (nambfr, nambbc, nambbl)
 !!              6 - Tracer           (nameos, namtra_adv, namtra_ldf, namtra_dmp)
 !!              7 - dynamics         (namdyn_adv, namdyn_vor, namdyn_hpg, namdyn_spg, namdyn_ldf)
@@ -248,7 +248,7 @@
    nn_components = 0       !  configuration of the opa-sas OASIS coupling
                            !  =0 no opa-sas OASIS coupling: default single executable configuration
                            !  =1 opa-sas OASIS coupling: multi executable configuration, OPA component
-                           !  =2 opa-sas OASIS coupling: multi executable configuration, SAS component 
+                           !  =2 opa-sas OASIS coupling: multi executable configuration, SAS component
    ln_apr_dyn  = .false.   !  Patm gradient added in ocean & ice Eqs.   (T => fill namsbc_apr )
    nn_ice      = 2         !  =0 no ice boundary condition   ,
                            !  =1 use observed ice-cover      ,
@@ -491,6 +491,7 @@
 !              !             !  (if <0  months)  !   name    !   (logical)  !  (T/F) ! 'monthly' ! filename ! pairing  ! filename      !
    sn_sst      = 'sst_data'  ,        24         ,  'sst'    ,    .false.   , .false., 'yearly'  , ''       , ''       , ''
    sn_sss      = 'sss_data'  ,        -1         ,  'sss'    ,    .true.    , .true. , 'yearly'  , ''       , ''       , ''
+   sn_coast    = 'dist_coast_CREG025_vh20161121'           ,         0    ,  'Tcoast'    ,  .false.   , .true. , 'yearly'  ,  ''      , ''
 
    cn_dir      = './'      !  root directory for the location of the runoff files
    nn_sstr     =     0     !  add a retroaction term in the surface heat       flux (=1) or not (=0)
@@ -623,6 +624,26 @@
     nn_rimwidth   = 10                    !  width of the relaxation zone
     ln_vol        = .false.               !  total volume correction (see nn_volctl parameter)
     nn_volctl     = 1                     !  = 0, the total water flux across open boundaries is zero
+/
+!-----------------------------------------------------------------------
+&nambdy_index  !  structured open boundaries definition     ("key_bdy")
+!-----------------------------------------------------------------------
+    ctypebdy ='S'                   ! Open boundary type (W,E,S or N)
+    nbdyind  = 2                    ! indice of velocity row or column
+                                    ! if ==-1, set obc at the domain boundary
+                                    !        , discard start and end indices
+    nbdybeg  = 54                   ! indice of segment start
+    nbdyend  = 324                  ! indice of segment end
+/
+!-----------------------------------------------------------------------
+&nambdy_index  !  structured open boundaries definition     ("key_bdy")
+!-----------------------------------------------------------------------
+    ctypebdy ='N'                   ! Open boundary type (W,E,S or N)
+    nbdyind  = 601                  ! indice of velocity row or column
+                                    ! if ==-1, set obc at the domain boundary
+                                    !        , discard start and end indices
+    nbdybeg  = 202                  ! indice of segment start
+    nbdyend  = 223                  ! indice of segment end
 /
 !-----------------------------------------------------------------------
 &nambdy_dta      !  open boundaries - external data           ("key_bdy")
@@ -1295,7 +1316,6 @@
 !-----------------------------------------------------------------------
    ! Suggested lengthscale values are those of Eby & Holloway (1994) for a coarse model
    ln_neptsimp       = .false.  ! yes/no use simplified neptune
-
    ln_smooth_neptvel = .false.  ! yes/no smooth zunep, zvnep
    rn_tslse          =  1.2e4   ! value of lengthscale L at the equator
    rn_tslsp          =  3.0e3   ! value of lengthscale L at the pole
@@ -1305,3 +1325,4 @@
    rn_htrmin         =  100.0   ! min. depth of transition range
    rn_htrmax         =  200.0   ! max. depth of transition range
 /
+
