@@ -452,6 +452,7 @@
    bn_v3d  =   'ORCA025.L75-GJM189-CREG025.L75-BDY_south_V'   ,  -1   , 'vomecrty' ,     .true.     , .false. ,  'yearly'  ,    ''    ,   ''     ,     ''
    bn_tem  =   'ORCA025.L75-GJM189-CREG025.L75-BDY_south_T'   ,  -1   , 'votemper' ,     .true.     , .false. ,  'yearly'  ,    ''    ,   ''     ,     ''
    bn_sal  =   'ORCA025.L75-GJM189-CREG025.L75-BDY_south_S'   ,  -1   , 'vosaline' ,     .true.     , .false. ,  'yearly'  ,    ''    ,   ''     ,     ''
+   !
    cn_dir  =    './BDY/'
    ln_full_vel = .true.
 /
@@ -465,10 +466,12 @@
    bn_v3d  =   'ORCA025.L75-GJM189-CREG025.L75-BDY_north_V'      ,  -1   , 'vomecrty' ,     .true.     , .false. ,  'yearly'  ,    ''    ,   ''     ,     ''
    bn_tem  =   'ORCA025.L75-GJM189-CREG025.L75-BDY_north_T'      ,  -1   , 'votemper' ,     .true.     , .false. ,  'yearly'  ,    ''    ,   ''     ,     ''
    bn_sal  =   'ORCA025.L75-GJM189-CREG025.L75-BDY_north_S'      ,  -1   , 'vosaline' ,     .true.     , .false. ,  'yearly'  ,    ''    ,   ''     ,     ''
+   !
    ! NO ICE! WE ARE OPA only!!! 
    cn_dir  =    './BDY/'
    ln_full_vel = .true.
 /
+
 !-----------------------------------------------------------------------
 &nambdy_tide     ! tidal forcing at open boundaries
 !-----------------------------------------------------------------------
@@ -809,8 +812,8 @@
                            !  buffer blocking send or immediate non-blocking sends, resp.
    nn_buffer   =   0       !  size in bytes of exported buffer ('B' case), 0 no exportation
    ln_nnogather=  .false.  !  activate code to avoid mpi_allgather use at the northfold
-   jpni        =   12  !  jpni   number of processors following i (set automatically if < 1)
-   jpnj        =   5  !  jpnj   number of processors following j (set automatically if < 1)
+   jpni        =   6  !  jpni   number of processors following i (set automatically if < 1)
+   jpnj        =   10  !  jpnj   number of processors following j (set automatically if < 1)
    jpnij       =   54 !  jpnij  number of local domains (set automatically if < 1)
 /
 !-----------------------------------------------------------------------
