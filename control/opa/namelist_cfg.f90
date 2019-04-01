@@ -108,7 +108,7 @@
    rn_e3zps_min=   25.     !  partial step thickness is set larger than the minimum of
    rn_e3zps_rat=    0.2    !  rn_e3zps_min and rn_e3zps_rat*e3t, with 0<rn_e3zps_rat<1
                            !
-   rn_rdt      =    900.   ! 15 minutes  time step for the dynamics (and tracer if nn_acc=0)
+   rn_rdt      =  900.     !  time step for the dynamics (and tracer if nn_acc=0)
    rn_atfp     =    0.1    !  asselin time filter parameter
    nn_acc      =    0      !  acceleration of convergence : =1      used, rdt < rdttra(k)
                                  !                          =0, not used, rdt = rdttra
@@ -147,7 +147,7 @@
    ln_bt_av      =    .TRUE.           !  Time filtering of barotropic variables
    ln_bt_nn_auto =    .TRUE.           !  Set nn_baro automatically to be just below
                                        !  a user defined maximum courant number (rn_bt_cmax)
-   nn_baro       =    30               !  Number of iterations of barotropic mode
+   nn_baro       =    48               !  Number of iterations of barotropic mode
                                        !  during rn_rdt seconds. Only used if ln_bt_nn_auto=F
    rn_bt_cmax    =    0.65             ! #LOLO! Maximum courant number allowed if ln_bt_nn_auto=T  #lulu
    nn_bt_flt     =    2                ! #LOLO! Time filter choice ( => Jouano p.c. ?)
@@ -324,7 +324,7 @@
 !              !             !  (if <0  months)  !   name    !   (logical)  !  (T/F) ! 'monthly' ! filename ! pairing  ! filename      !
    sn_sst      = 'woa09_sst01-12_monthly_1deg_t_an_CMA_drowned_Ex_L75' ,   -12   ,  't_an'   ,  .true.   , .true. , 'yearly'   , 'SST_reshape_WOA09_REG1toCREG025_bilin.nc'       , ''       , ''
    sn_sss      = 'woa09_sss01-12_monthly_1deg_s_an_CMA_drowned_Ex_L75' ,   -12   ,  's_an'   ,  .true.    , .true. , 'yearly'  , 'SSS_reshape_WOA09_REG1toCREG025_bilin.nc'       , ''       , ''
-   sn_coast    = 'dist_coast_CREG025_vh20161121'           ,         0    ,  'Tcoast'    ,  .false.   , .true. , 'yearly'  ,  ''      , ''
+   sn_coast    = 'dist_coast_CREG025_ct20190401'           ,         0    ,  'Tcoast'    ,  .false.   , .true. , 'yearly'  ,  ''      , ''
 
    cn_dir      = './'      !  root directory for the location of the runoff files
    nn_sstr     =     0     !  add a retroaction term in the surface heat       flux (=1) or not (=0)
@@ -347,7 +347,7 @@
                         !     0: Shine & Henderson-Sellers (JGR 1985)
                         !     1: "home made" based on Brandt et al. (J. Climate 2005)
                         !                         and Grenfell & Perovich (JGR 2004)
-   rn_albice   =  0.53  !  albedo of bare puddled ice (values from 0.49 to 0.58)
+   rn_albice   =  0.58  !  albedo of bare puddled ice (values from 0.49 to 0.58)
                         !     0.53 (default) => if nn_ice_alb=0
                         !     0.50 (default) => if nn_ice_alb=1
 /
@@ -445,27 +445,27 @@
 !-----------------------------------------------------------------------
 &nambdy_dta      !  open boundaries - external data           ("key_bdy")
 !-----------------------------------------------------------------------
-!              !  file name      ! frequency (hours) ! variable   ! time interp.   !  clim   ! 'yearly'/ ! weights  ! rotation ! land/sea mask !
-!              !                 !  (if <0  months)  !   name     !   (logical)    !  (T/F ) ! 'monthly' ! filename ! pairing  ! filename      !
-   bn_ssh =    'obc_south_y19952015_SSH_3.6.nc' ,  -1   , 'sossheig' ,     .true.     , .true. ,  'yearly'  ,    ''    ,   ''     ,     ''
-   bn_u3d  =   'obc_south_y19952015_U_3.6.nc'   ,  -1   , 'vozocrtx' ,     .true.     , .true. ,  'yearly'  ,    ''    ,   ''     ,     ''
-   bn_v3d  =   'obc_south_y19952015_V_3.6.nc'   ,  -1   , 'vomecrty' ,     .true.     , .true. ,  'yearly'  ,    ''    ,   ''     ,     ''
-   bn_tem  =   'obc_south_y19952015_T_3.6.nc'   ,  -1   , 'votemper' ,     .true.     , .true. ,  'yearly'  ,    ''    ,   ''     ,     ''
-   bn_sal  =   'obc_south_y19952015_S_3.6.nc'   ,  -1   , 'vosaline' ,     .true.     , .true. ,  'yearly'  ,    ''    ,   ''     ,     ''
+!              !   file name    ! frequency (hours) !  variable  ! time interpol. !  clim   ! 'yearly'/ ! weights  ! rotation ! land/sea mask !
+!              !                !  (if <0  months)  !    name    !    (logical)   !  (T/F)  ! 'monthly' ! filename ! pairing  ! filename      !
+   bn_ssh =    'ORCA025.L75-GJM189-CREG025.L75-BDY_south_SSH' ,  -1   , 'sossheig' ,     .true.     , .false. ,  'yearly'  ,    ''    ,   ''     ,     ''
+   bn_u3d  =   'ORCA025.L75-GJM189-CREG025.L75-BDY_south_U'   ,  -1   , 'vozocrtx' ,     .true.     , .false. ,  'yearly'  ,    ''    ,   ''     ,     ''
+   bn_v3d  =   'ORCA025.L75-GJM189-CREG025.L75-BDY_south_V'   ,  -1   , 'vomecrty' ,     .true.     , .false. ,  'yearly'  ,    ''    ,   ''     ,     ''
+   bn_tem  =   'ORCA025.L75-GJM189-CREG025.L75-BDY_south_T'   ,  -1   , 'votemper' ,     .true.     , .false. ,  'yearly'  ,    ''    ,   ''     ,     ''
+   bn_sal  =   'ORCA025.L75-GJM189-CREG025.L75-BDY_south_S'   ,  -1   , 'vosaline' ,     .true.     , .false. ,  'yearly'  ,    ''    ,   ''     ,     ''
    cn_dir  =    './BDY/'
    ln_full_vel = .true.
 /
 !-----------------------------------------------------------------------
 &nambdy_dta      !  open boundaries - external data           ("key_bdy")
 !-----------------------------------------------------------------------
-!              !  file name      ! frequency (hours) ! variable   ! time interp.   !  clim   ! 'yearly'/ ! weights  ! rotation ! land/sea mask !
-!              !                 !  (if <0  months)  !   name     !   (logical)    !  (T/F ) ! 'monthly' ! filename ! pairing  ! filename      !
-   bn_ssh  =   'obc_north_y19952015_SSH_3.6.nc' ,  -1   , 'sossheig' ,     .true.     , .true. ,  'yearly'  ,    ''    ,   ''     ,     ''
-   bn_u3d  =   'obc_north_y19952015_U_manip_3.6.nc'   ,  -1   , 'vozocrtx' ,     .true.     , .true. ,  'yearly'  ,    ''    ,   ''     ,     ''
-   bn_v3d  =   'obc_north_y19952015_V_manip_3.6.nc'   ,  -1   , 'vomecrty' ,     .true.     , .true. ,  'yearly'  ,    ''    ,   ''     ,     ''
-   bn_tem  =   'obc_north_y19952015_T_3.6.nc'   ,  -1   , 'votemper' ,     .true.     , .true. ,  'yearly'  ,    ''    ,   ''     ,     ''
-   bn_sal  =   'obc_north_y19952015_S_3.6.nc'   ,  -1   , 'vosaline' ,     .true.     , .true. ,  'yearly'  ,    ''    ,   ''     ,     ''
-  !NO ICE! WE ARE OPA only!!! 
+!              !   file name    ! frequency (hours) !  variable  ! time interpol. !  clim   ! 'yearly'/ ! weights  ! rotation ! land/sea mask !
+!              !                !  (if <0  months)  !    name    !    (logical)   !  (T/F)  ! 'monthly' ! filename ! pairing  ! filename      !
+   bn_ssh  =   'ORCA025.L75-GJM189-CREG025.L75-BDY_north_SSH'    ,  -1   , 'sossheig' ,     .true.     , .false. ,  'yearly'  ,    ''    ,   ''     ,     ''
+   bn_u3d  =   'ORCA025.L75-GJM189-CREG025.L75-BDY_north_U'      ,  -1   , 'vozocrtx' ,     .true.     , .false. ,  'yearly'  ,    ''    ,   ''     ,     ''
+   bn_v3d  =   'ORCA025.L75-GJM189-CREG025.L75-BDY_north_V'      ,  -1   , 'vomecrty' ,     .true.     , .false. ,  'yearly'  ,    ''    ,   ''     ,     ''
+   bn_tem  =   'ORCA025.L75-GJM189-CREG025.L75-BDY_north_T'      ,  -1   , 'votemper' ,     .true.     , .false. ,  'yearly'  ,    ''    ,   ''     ,     ''
+   bn_sal  =   'ORCA025.L75-GJM189-CREG025.L75-BDY_north_S'      ,  -1   , 'vosaline' ,     .true.     , .false. ,  'yearly'  ,    ''    ,   ''     ,     ''
+   ! NO ICE! WE ARE OPA only!!! 
    cn_dir  =    './BDY/'
    ln_full_vel = .true.
 /
@@ -697,7 +697,7 @@
 !-----------------------------------------------------------------------
 &namzdf        !   vertical physics
 !-----------------------------------------------------------------------
-   rn_avm0     =  1.4e-6  !  vertical eddy viscosity   [m2/s]          (background Kz if not "key_zdfcst")
+   rn_avm0     =  1.4e-06  !  vertical eddy viscosity   [m2/s]          (background Kz if not "key_zdfcst")
    rn_avt0     =  1.0e-10  !  vertical eddy diffusivity [m2/s]          (background Kz if not "key_zdfcst")
    nn_avb      =    0      !  profile for background avt & avm (=1) or not (=0)
    nn_havtb    =    0      !  horizontal shape for avtb (=1) or not (=0)
