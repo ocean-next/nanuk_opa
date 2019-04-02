@@ -20,6 +20,8 @@ So why is it there then? Well, just for us to make sure we are really using the 
 
 - ```control/oasis``` contains the "namcouple" OASIS namelist
 
+- ```control/nextsim``` contains the info about which neXtSIM distro ($NEXTSIMDIR) to use and the appropriate "cpl_run.cfg"
+
 
 ### ```compile/```: contains relevant files needed to compile OPA.
 
