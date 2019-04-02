@@ -13,7 +13,11 @@
   <file_group id="3h" output_freq="3h"  output_level="10" enabled=".TRUE." /> <!-- 3h files -->
   <file_group id="4h" output_freq="4h"  output_level="10" enabled=".TRUE."/> <!-- 4h files -->
 
-  <file_group id="6h" output_freq="6h" split_freq="1mo" output_level="10" enabled=".TRUE.">
+
+
+  <!--  ####################   2D fields saved at 6-hourly frequency ################################ -->
+
+  <file_group id="6h" output_freq="6h" split_freq="5d" output_level="10" enabled=".TRUE.">
 
     <!-- ########    T-GRID 2D fields   ########  -->
     <file id="file1" name_suffix="_gridT-2D" description="ocean T grid variables" >
@@ -79,7 +83,11 @@
   </file_group>
 
   
-  <file_group id="1d" output_freq="1d"  output_level="10" enabled=".TRUE."> <!-- 1d files -->
+
+
+  <!--  ####################   3D fields saved at daily frequency ################################ -->
+
+  <file_group id="1d" output_freq="1d" split_freq="5d" output_level="10" enabled=".TRUE."> <!-- 1d files -->
     
     <!-- ########    T-GRID    ########  -->
     <file id="file11" name_suffix="_gridT" description="ocean T grid variables" >
