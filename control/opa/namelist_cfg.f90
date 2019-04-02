@@ -24,7 +24,7 @@
 &namrun        !   parameters of the run
 !-----------------------------------------------------------------------
    nn_no       =       0   !  job number (no more used...)
-   cn_exp      =  'CREG025_NXSOA3-ILBOX00'
+   cn_exp      =  'CREG025_NXSOA3-ILBOXNN'
    nn_it000    =    1 !  first time step
    nn_itend    =    480 !  last  time step (std 5475)
    nn_date0    =    19950101 !  date at nit_0000 (format yyyymmdd) used if ln_rstart=F or (ln_rstart=T and nn_rstctl=0 or 1)
@@ -262,6 +262,7 @@
 &namsbc_cpl    !   coupled ocean/atmosphere model                       ("key_oasis3")
 !-----------------------------------------------------------------------
 !! OPA - oasis - SAS mode doesn't need this!!!
+   sn_rcv_rnf    =       'none'                ,    'no'    ,     ''      ,         ''          ,   ''
 /
 !-----------------------------------------------------------------------
 &namsbc_sas    !   analytical surface boundary condition
