@@ -6,8 +6,7 @@
     ============================================================================================================
 -->
 
-<!-- <file_definition type="one_file" name="@expname@_@freq@_@startdate@_@enddate@" sync_freq="1d" min_digits="4"> -->
-<file_definition type="multiple_file" name="@expname@_@freq@_@startdate@_@enddate@" sync_freq="1d" min_digits="4">
+<file_definition type="multiple_file" name="@expname@_@freq@" sync_freq="1d" min_digits="4">
 
   <file_group id="2h" output_freq="2h"  output_level="10" enabled=".TRUE."/> <!-- 2h files -->
   <file_group id="3h" output_freq="3h"  output_level="10" enabled=".TRUE." /> <!-- 3h files -->
@@ -32,7 +31,7 @@
       <variable name="start_date"       type="int">19950101         </variable>
       <variable name="output_frequency" type="string">6h            </variable>
       <variable name="CONFIG"           type="string">CREG025   </variable>
-      <variable name="CASE"             type="string">ILBOX00 </variable>
+      <variable name="CASE"             type="string">ILBOXNN </variable>
     </file>
 
     <!-- ########    U-GRID 2D fields   ########  -->
@@ -43,7 +42,7 @@
       <variable name="start_date"       type="int">19950101    </variable>
       <variable name="output_frequency" type="string">6h       </variable>
       <variable name="CONFIG"           type="string">CREG025 </variable>
-      <variable name="CASE"             type="string">ILBOX00   </variable>
+      <variable name="CASE"             type="string">ILBOXNN   </variable>
     </file>
 
     <!-- ########    V-GRID 2D fields   ########  -->
@@ -54,7 +53,7 @@
       <variable name="start_date"       type="int">19950101    </variable>
       <variable name="output_frequency" type="string">6h       </variable>
       <variable name="CONFIG"           type="string">CREG025 </variable>
-      <variable name="CASE"             type="string">ILBOX00   </variable>
+      <variable name="CASE"             type="string">ILBOXNN   </variable>
     </file>
 
     <!-- ########    FLXT-GRID    ########  -->
@@ -77,7 +76,7 @@
       <variable name="start_date"       type="int">19950101    </variable>
       <variable name="output_frequency" type="string">6h       </variable>
       <variable name="CONFIG"           type="string">CREG025 </variable>
-      <variable name="CASE"             type="string">ILBOX00   </variable>
+      <variable name="CASE"             type="string">ILBOXNN   </variable>
     </file>
 
   </file_group>
@@ -98,7 +97,7 @@
       <variable name="start_date"       type="int">19950101         </variable>
       <variable name="output_frequency" type="string">6h            </variable>
       <variable name="CONFIG"           type="string">CREG025   </variable>
-      <variable name="CASE"             type="string">ILBOX00 </variable>
+      <variable name="CASE"             type="string">ILBOXNN </variable>
     </file>
 
     <!-- ########    U-GRID    ########  -->
@@ -108,7 +107,7 @@
       <variable name="start_date"       type="int">19950101    </variable>
       <variable name="output_frequency" type="string">6h       </variable>
       <variable name="CONFIG"           type="string">CREG025 </variable>
-      <variable name="CASE"             type="string">ILBOX00   </variable>
+      <variable name="CASE"             type="string">ILBOXNN   </variable>
     </file>
 
     <!-- ########    V-GRID    ########  -->
@@ -118,7 +117,7 @@
       <variable name="start_date"       type="int">19950101    </variable>
       <variable name="output_frequency" type="string">6h       </variable>
       <variable name="CONFIG"           type="string">CREG025 </variable>
-      <variable name="CASE"             type="string">ILBOX00   </variable>
+      <variable name="CASE"             type="string">ILBOXNN   </variable>
     </file>
 
     <!-- ########    W-GRID    ########  -->
@@ -131,7 +130,7 @@
       <variable name="start_date"       type="int">19950101    </variable>
       <variable name="output_frequency" type="string">6h       </variable>
       <variable name="CONFIG"           type="string">CREG025 </variable>
-      <variable name="CASE"             type="string">ILBOX00   </variable>
+      <variable name="CASE"             type="string">ILBOXNN   </variable>
     </file>
 
   </file_group>

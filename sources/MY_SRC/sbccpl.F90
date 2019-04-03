@@ -536,53 +536,9 @@ CONTAINS
             WRITE(numout,*)
          ENDIF
       ENDIF
-      !                                                      ! -------------------------------- !
-      !                                                      !   OPA-SAS coupling - rcv by sas  !
-      !                                                      ! -------------------------------- !
-      srcv(jpr_toce  )%clname = 'I_SSTSST'
-      srcv(jpr_soce  )%clname = 'I_SSSal'
-      srcv(jpr_ocx1  )%clname = 'I_OCurx1'
-      srcv(jpr_ocy1  )%clname = 'I_OCury1'
-      srcv(jpr_ssh   )%clname = 'I_SSHght'
-      srcv(jpr_e3t1st)%clname = 'I_E3T1st'
-      srcv(jpr_fraqsr)%clname = 'I_FraQsr'
-      !
-      IF( nn_components == jp_iam_sas ) THEN
-         IF( .NOT. ln_cpl ) srcv(:)%laction = .FALSE.   ! force default definition in case of opa <-> sas coupling
-         IF( .NOT. ln_cpl ) srcv(:)%clgrid  = 'T'       ! force default definition in case of opa <-> sas coupling
-         IF( .NOT. ln_cpl ) srcv(:)%nsgn    = 1.        ! force default definition in case of opa <-> sas coupling
-         srcv( (/jpr_toce, jpr_soce, jpr_ssh, jpr_fraqsr, jpr_ocx1, jpr_ocy1/) )%laction = .TRUE.
-         srcv( jpr_e3t1st )%laction = lk_vvl
-         srcv(jpr_ocx1)%clgrid = 'U'        ! oce components given at U-point
-         srcv(jpr_ocy1)%clgrid = 'V'        !           and           V-point
-         ! Vectors: change of sign at north fold ONLY if on the local grid
-         srcv(jpr_ocx1:jpr_ocy1)%nsgn = -1.
-         ! Change first letter to couple with atmosphere if already coupled OPA
-         ! this is nedeed as each variable name used in the namcouple must be unique:
-         ! for example O_Runoff received by OPA from SAS and therefore O_Runoff received by SAS from the Atmosphere
-         DO jn = 1, jprcv
-            IF ( srcv(jn)%clname(1:1) == "O" ) srcv(jn)%clname = "S"//srcv(jn)%clname(2:LEN(srcv(jn)%clname))
-         END DO
-         !
-         IF(lwp) THEN                        ! control print
-            WRITE(numout,*)
-            WRITE(numout,*)'               Special conditions for SAS-OPA coupling  '
-            WRITE(numout,*)'               SAS component  '
-            WRITE(numout,*)
-            IF( .NOT. ln_cpl ) THEN
-               WRITE(numout,*)'  received fields from OPA component '
-            ELSE
-               WRITE(numout,*)'  Additional received fields from OPA component : '
-            ENDIF
-            WRITE(numout,*)'               sea surface temperature (Celcius) '
-            WRITE(numout,*)'               sea surface salinity '
-            WRITE(numout,*)'               surface currents '
-            WRITE(numout,*)'               sea surface height '
-            WRITE(numout,*)'               thickness of first ocean T level '
-            WRITE(numout,*)'               fraction of solar net radiation absorbed in the first ocean level'
-            WRITE(numout,*)
-         ENDIF
-      ENDIF
+
+
+
 
       ! =================================================== !
       ! Allocate all parts of frcv used for received fields !
@@ -707,9 +663,9 @@ CONTAINS
       !                                                      ! ------------------------- !
       ssnd(jps_co2)%clname = 'O_CO2FLX' ;  IF( TRIM(sn_snd_co2%cldes) == 'coupled' )    ssnd(jps_co2 )%laction = .TRUE.
 
-      !                                                      ! ------------------------------- !
+      !                                                      ! ----------------------------------- !
       !                                                      !   OPA-neXtSIM coupling - snd by opa !
-      !                                                      ! ------------------------------- !
+      !                                                      ! ----------------------------------- !
       ssnd(jps_ssh   )%clname = 'O_SSHght'
       ssnd(jps_soce  )%clname = 'O_SSSal'
       ssnd(jps_e3t1st)%clname = 'O_E3T1st'
@@ -752,46 +708,8 @@ CONTAINS
             WRITE(numout,*)
          ENDIF
       ENDIF
-      !                                                      ! ------------------------------- !
-      !                                                      !   OPA-SAS coupling - snd by sas !
-      !                                                      ! ------------------------------- !
-      ssnd(jps_sflx  )%clname = 'I_SFLX'
-      ssnd(jps_fice2 )%clname = 'IIceFrc'
-      ssnd(jps_qsroce)%clname = 'I_QsrOce'
-      ssnd(jps_qnsoce)%clname = 'I_QnsOce'
-      ssnd(jps_oemp  )%clname = 'IOEvaMPr'
-      ssnd(jps_otx1  )%clname = 'I_OTaux1'
-      ssnd(jps_oty1  )%clname = 'I_OTauy1'
-      ssnd(jps_rnf   )%clname = 'I_Runoff'
-      ssnd(jps_taum  )%clname = 'I_TauMod'
-      !
-      IF( nn_components == jp_iam_sas ) THEN
-         IF( .NOT. ln_cpl ) ssnd(:)%laction = .FALSE.   ! force default definition in case of opa <-> sas coupling
-         ssnd( (/jps_qsroce, jps_qnsoce, jps_oemp, jps_fice2, jps_sflx, jps_otx1, jps_oty1, jps_taum/) )%laction = .TRUE.
-         !
-         ! Change first letter to couple with atmosphere if already coupled with sea_ice
-         ! this is nedeed as each variable name used in the namcouple must be unique:
-         ! for example O_SSTSST sent by OPA to SAS and therefore S_SSTSST sent by SAS to the Atmosphere
-         DO jn = 1, jpsnd
-            IF ( ssnd(jn)%clname(1:1) == "O" ) ssnd(jn)%clname = "S"//ssnd(jn)%clname(2:LEN(ssnd(jn)%clname))
-         END DO
-         !
-         IF(lwp) THEN                        ! control print
-            WRITE(numout,*)
-            IF( .NOT. ln_cpl ) THEN
-               WRITE(numout,*)'  sent fields to OPA component '
-            ELSE
-               WRITE(numout,*)'  Additional sent fields to OPA component : '
-            ENDIF
-            WRITE(numout,*)'                  ice cover '
-            WRITE(numout,*)'                  oce only EMP  '
-            WRITE(numout,*)'                  salt flux  '
-            WRITE(numout,*)'                  mixed oce-ice solar flux  '
-            WRITE(numout,*)'                  mixed oce-ice non solar flux  '
-            WRITE(numout,*)'                  wind stress U,V components'
-            WRITE(numout,*)'                  wind stress module'
-         ENDIF
-      ENDIF
+
+
 
       !
       ! ================================ !
@@ -944,7 +862,7 @@ CONTAINS
             !   lolo opa-sas: srcv(jpr_otx1)%clgrid = 'U'
             IF( srcv(jpr_otx1)%clgrid == 'T' ) THEN
                !LOLO: normally in case l_vect_exchg_T==TRUE, then srcv(jpr_otx1)%clgrid has been set to 'T' ! => #daisy
-               IF(lwp) WRITE(numout,*) 'LB:(OPA)sbccpl: we (should have) received Taux and Tauy on T-points! => interpolating to U,V!'
+               !IF(lwp) WRITE(numout,*) 'LB:(OPA)sbccpl: we (should have) received Taux and Tauy on T-points! => interpolating to U,V!'
                DO jj = 2, jpjm1                                          ! T ==> (U,V)
                   DO ji = fs_2, fs_jpim1   ! vector opt.
                      frcv(jpr_otx1)%z3(ji,jj,1) = 0.5 * ( frcv(jpr_otx1)%z3(ji+1,jj  ,1) + frcv(jpr_otx1)%z3(ji,jj,1) )
@@ -952,8 +870,8 @@ CONTAINS
                   END DO
                END DO
                CALL lbc_lnk( frcv(jpr_otx1)%z3(:,:,1), 'U',  -1. )   ;   CALL lbc_lnk( frcv(jpr_oty1)%z3(:,:,1), 'V',  -1. )
-            ELSE
-               IF(lwp) WRITE(numout,*) 'LB:(OPA)sbccpl: we received Taux and Tauy on U,V-points! no T-interp needed! (frcv(jpr_otx1)%z3, frcv(jpr_oty1)%z3)'
+               !ELSE
+               !IF(lwp) WRITE(numout,*) 'LB:(OPA)sbccpl: we received Taux and Tauy on U,V-points! no T-interp needed! (frcv(jpr_otx1)%z3, frcv(jpr_oty1)%z3)'
             ENDIF
             llnewtx = .TRUE.
          ELSE
@@ -1024,7 +942,7 @@ CONTAINS
             taum(:,:) = taum(:,:) * xcplmask(:,:,0) + frcv(jpr_taum)%z3(:,:,1) * zmsk(:,:)
             wndm(:,:) = wndm(:,:) * xcplmask(:,:,0) + frcv(jpr_w10m)%z3(:,:,1) * zmsk(:,:)
          ELSE
-            IF(lwp) WRITE(numout,*) 'LB:(OPA)sbccpl: feeding OPA "utau","vtau" with (received) "frcv(jpr_otx1)%z3","frcv(jpr_oty1)%z3"', ln_mixcpl
+            !IF(lwp) WRITE(numout,*) 'LB:(OPA)sbccpl: feeding OPA "utau","vtau" with (received) "frcv(jpr_otx1)%z3","frcv(jpr_oty1)%z3"', ln_mixcpl
             utau(:,:) = frcv(jpr_otx1)%z3(:,:,1)
             vtau(:,:) = frcv(jpr_oty1)%z3(:,:,1)
             taum(:,:) = frcv(jpr_taum)%z3(:,:,1)
@@ -1041,61 +959,6 @@ CONTAINS
       IF( srcv(jpr_co2)%laction )   atm_co2(:,:) = frcv(jpr_co2)%z3(:,:,1)
 #endif
 
-      !  Fields received by SAS when OASIS coupling
-      !  (arrays no more filled at sbcssm stage)
-      !                                                      ! ================== !
-      !                                                      !        SSS         !
-      !                                                      ! ================== !
-      IF( srcv(jpr_soce)%laction ) THEN                      ! received by sas in case of opa <-> sas coupling
-         sss_m(:,:) = frcv(jpr_soce)%z3(:,:,1)
-         CALL iom_put( 'sss_m', sss_m )
-      ENDIF
-      !
-      !                                                      ! ================== !
-      !                                                      !        SST         !
-      !                                                      ! ================== !
-      IF( srcv(jpr_toce)%laction ) THEN                      ! received by sas in case of opa <-> sas coupling
-         sst_m(:,:) = frcv(jpr_toce)%z3(:,:,1)
-         IF( srcv(jpr_soce)%laction .AND. ln_useCT ) THEN    ! make sure that sst_m is the potential temperature
-            sst_m(:,:) = eos_pt_from_ct( sst_m(:,:), sss_m(:,:) )
-         ENDIF
-      ENDIF
-      !                                                      ! ================== !
-      !                                                      !        SSH         !
-      !                                                      ! ================== !
-      IF( srcv(jpr_ssh )%laction ) THEN                      ! received by sas in case of opa <-> sas coupling
-         ssh_m(:,:) = frcv(jpr_ssh )%z3(:,:,1)
-         CALL iom_put( 'ssh_m', ssh_m )
-      ENDIF
-      !                                                      ! ================== !
-      !                                                      !  surface currents  !
-      !                                                      ! ================== !
-      IF( srcv(jpr_ocx1)%laction ) THEN                      ! received by sas in case of opa <-> sas coupling
-         ssu_m(:,:) = frcv(jpr_ocx1)%z3(:,:,1)
-         ub (:,:,1) = ssu_m(:,:)                             ! will be used in sbcice_lim in the call of lim_sbc_tau
-         un (:,:,1) = ssu_m(:,:)                             ! will be used in sbc_cpl_snd if atmosphere coupling
-         CALL iom_put( 'ssu_m', ssu_m )
-      ENDIF
-      IF( srcv(jpr_ocy1)%laction ) THEN
-         ssv_m(:,:) = frcv(jpr_ocy1)%z3(:,:,1)
-         vb (:,:,1) = ssv_m(:,:)                             ! will be used in sbcice_lim in the call of lim_sbc_tau
-         vn (:,:,1) = ssv_m(:,:)                             ! will be used in sbc_cpl_snd if atmosphere coupling
-         CALL iom_put( 'ssv_m', ssv_m )
-      ENDIF
-      !                                                      ! ======================== !
-      !                                                      !  first T level thickness !
-      !                                                      ! ======================== !
-      IF( srcv(jpr_e3t1st )%laction ) THEN                   ! received by sas in case of opa <-> sas coupling
-         e3t_m(:,:) = frcv(jpr_e3t1st )%z3(:,:,1)
-         CALL iom_put( 'e3t_m', e3t_m(:,:) )
-      ENDIF
-      !                                                      ! ================================ !
-      !                                                      !  fraction of solar net radiation !
-      !                                                      ! ================================ !
-      IF( srcv(jpr_fraqsr)%laction ) THEN                    ! received by sas in case of opa <-> sas coupling
-         frq_m(:,:) = frcv(jpr_fraqsr)%z3(:,:,1)
-         CALL iom_put( 'frq_m', frq_m )
-      ENDIF
 
       !                                                      ! ========================= !
       IF( k_ice <= 1 .AND. MOD( kt-1, k_fsbc ) == 0 ) THEN   !  heat & freshwater fluxes ! (Ocean only case)
@@ -1149,9 +1012,9 @@ CONTAINS
          ELSE                   ;   qsr(:,:) =                              zqsr(:,:)
          ENDIF
          !
-         ! salt flux over the ocean (received by opa in case of opa <-> sas coupling)
+         ! salt flux over the ocean (received by opa in case of opa <-> nextsim coupling)
          IF( srcv(jpr_sflx )%laction )   sfx(:,:) = frcv(jpr_sflx  )%z3(:,:,1)
-         ! Ice cover  (received by opa in case of opa <-> sas coupling)
+         ! Ice cover  (received by opa in case of opa <-> nextsim coupling)
          IF( srcv(jpr_fice )%laction )   fr_i(:,:) = frcv(jpr_fice )%z3(:,:,1)
          !
 
@@ -1991,10 +1854,10 @@ CONTAINS
          !                                                              i-1  i   i
          !                                                               i      i+1 (for I)
          IF( nn_components == jp_iam_opa ) THEN
-            IF(lwp) WRITE(numout,*) 'LB:(OPA)sbccpl: will fill "zotx1","zoty1" (to be sent) with "un","vn" => '//TRIM(sn_snd_crt%clvgrd)//' points!'
+            !IF(lwp) WRITE(numout,*) 'LB:(OPA)sbccpl: will fill "zotx1","zoty1" (to be sent) with "un","vn" => '//TRIM(sn_snd_crt%clvgrd)//' points!'
             IF( l_vect_exchg_T ) THEN
                !LB: we send velocities interpolated on T grid points! (neXtSIM)
-               IF(lwp) WRITE(numout,*) 'LB:(OPA)sbccpl: "un","vn" are interpolated on T grid points!!!'
+               !IF(lwp) WRITE(numout,*) 'LB:(OPA)sbccpl: "un","vn" are interpolated on T grid points!!!'
                DO jj = 2, jpjm1
                   DO ji = fs_2, fs_jpim1   ! vector opt.
                      zotx1(ji,jj) = 0.5 * ( un(ji,jj,1) + un(ji-1,jj  ,1) )
@@ -2004,7 +1867,7 @@ CONTAINS
                CALL lbc_lnk( zotx1, ssnd(jps_ocx1)%clgrid, -1. )   ;   CALL lbc_lnk( zoty1, ssnd(jps_ocy1)%clgrid, -1. )
                !LB.
             ELSE
-               IF(lwp) WRITE(numout,*) 'LB:(OPA)sbccpl: "un","vn" do not need to interpolated on T grid points because sent on U,V points!'
+               !IF(lwp) WRITE(numout,*) 'LB:(OPA)sbccpl: "un","vn" do not need to interpolated on T grid points because sent on U,V points!'
                ! original:
                zotx1(:,:) = un(:,:,1)
                zoty1(:,:) = vn(:,:,1)
@@ -2121,9 +1984,9 @@ CONTAINS
             ENDIF
          ENDIF
          !
-         IF(lwp.AND.ssnd(jps_ocx1)%laction) WRITE(numout,*) 'LB:(OPA)sbccpl: sending SSU ("zotx1" | jps_ocx1)!'
-         IF(lwp.AND.ssnd(jps_ocy1)%laction) WRITE(numout,*) 'LB:(OPA)sbccpl: sending SSV ("zoty1" | jps_ocy1)!'
-         IF(lwp.AND.ssnd(jps_ocy1)%laction) WRITE(numout,*) ''
+         !IF(lwp.AND.ssnd(jps_ocx1)%laction) WRITE(numout,*) 'LB:(OPA)sbccpl: sending SSU ("zotx1" | jps_ocx1)!'
+         !IF(lwp.AND.ssnd(jps_ocy1)%laction) WRITE(numout,*) 'LB:(OPA)sbccpl: sending SSV ("zoty1" | jps_ocy1)!'
+         !IF(lwp.AND.ssnd(jps_ocy1)%laction) WRITE(numout,*) ''
 
          IF( ssnd(jps_ocx1)%laction )   CALL cpl_snd( jps_ocx1, isec, RESHAPE ( zotx1, (/jpi,jpj,1/) ), info )   ! ocean x current 1st grid
          IF( ssnd(jps_ocy1)%laction )   CALL cpl_snd( jps_ocy1, isec, RESHAPE ( zoty1, (/jpi,jpj,1/) ), info )   ! ocean y current 1st grid
