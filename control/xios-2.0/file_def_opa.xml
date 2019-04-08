@@ -6,7 +6,8 @@
     ============================================================================================================
 -->
 
-<file_definition type="multiple_file" name="@expname@_@freq@" sync_freq="1d" min_digits="4">
+<!-- <file_definition type="multiple_file" name="{SAVDIR}/@expname@_@freq@_@startdate@_@enddate@" sync_freq="1d" min_digits="4"> -->
+<file_definition type="multiple_file" name="{SAVDIR}/@expname@_@freq@" sync_freq="1d" min_digits="4">
 
   <file_group id="2h" output_freq="2h"  output_level="10" enabled=".TRUE."/> <!-- 2h files -->
   <file_group id="3h" output_freq="3h"  output_level="10" enabled=".TRUE." /> <!-- 3h files -->
@@ -28,10 +29,10 @@
       <field field_ref="mldr10_1"     name="mldr10_1"       long_name="Mixed Layer Depth (dsigma = 0.01 wrt 10m)"         />
       <field field_ref="botpres"      name="botpres"        long_name="Pressure at sea floor"                             />
       <!-- -->
-      <variable name="start_date"       type="int">19950101         </variable>
-      <variable name="output_frequency" type="string">6h            </variable>
-      <variable name="CONFIG"           type="string">CREG025   </variable>
-      <variable name="CASE"             type="string">ILBOXNN </variable>
+      <variable name="start_date"       type="int">{NDATE0}   </variable>
+      <variable name="output_frequency" type="string">6h      </variable>
+      <variable name="CONFIG"           type="string">{CONFIG}</variable>
+      <variable name="CASE"             type="string">{CASE}  </variable>
     </file>
 
     <!-- ########    U-GRID 2D fields   ########  -->
@@ -39,10 +40,10 @@
       <field field_ref="utau"         name="sozotaux"       long_name="surface_downward_x_stress" />
       <field field_ref="ssu"          name="sozocrtx" />
       <!-- -->
-      <variable name="start_date"       type="int">19950101    </variable>
+      <variable name="start_date"       type="int">{NDATE0}    </variable>
       <variable name="output_frequency" type="string">6h       </variable>
-      <variable name="CONFIG"           type="string">CREG025 </variable>
-      <variable name="CASE"             type="string">ILBOXNN   </variable>
+      <variable name="CONFIG"           type="string">{CONFIG} </variable>
+      <variable name="CASE"             type="string">{CASE}   </variable>
     </file>
 
     <!-- ########    V-GRID 2D fields   ########  -->
@@ -50,10 +51,10 @@
       <field field_ref="vtau"         name="sometauy"       long_name="surface_downward_y_stress" />
       <field field_ref="ssv"          name="somecrty" />
       <!-- -->
-      <variable name="start_date"       type="int">19950101    </variable>
+      <variable name="start_date"       type="int">{NDATE0}    </variable>
       <variable name="output_frequency" type="string">6h       </variable>
-      <variable name="CONFIG"           type="string">CREG025 </variable>
-      <variable name="CASE"             type="string">ILBOXNN   </variable>
+      <variable name="CONFIG"           type="string">{CONFIG} </variable>
+      <variable name="CASE"             type="string">{CASE}   </variable>
     </file>
 
     <!-- ########    FLXT-GRID    ########  -->
@@ -73,10 +74,10 @@
       <field field_ref="taum"         name="taum"       long_name="wind stress module"                            />
       <field field_ref="wspd"         name="windsp"     long_name="wind speed module"                             />
       <!-- -->
-      <variable name="start_date"       type="int">19950101    </variable>
+      <variable name="start_date"       type="int">{NDATE0}    </variable>
       <variable name="output_frequency" type="string">6h       </variable>
-      <variable name="CONFIG"           type="string">CREG025 </variable>
-      <variable name="CASE"             type="string">ILBOXNN   </variable>
+      <variable name="CONFIG"           type="string">{CONFIG} </variable>
+      <variable name="CASE"             type="string">{CASE}   </variable>
     </file>
 
   </file_group>
@@ -94,43 +95,43 @@
       <field field_ref="soce"         name="vosaline"       long_name="sea_water_salinity"                                />
       <field field_ref="rhop"         name="rhop_sig0"      long_name="potential density (sigma0)"                        />
       <!-- -->
-      <variable name="start_date"       type="int">19950101         </variable>
+      <variable name="start_date"       type="int">{NDATE0}         </variable>
       <variable name="output_frequency" type="string">6h            </variable>
-      <variable name="CONFIG"           type="string">CREG025   </variable>
-      <variable name="CASE"             type="string">ILBOXNN </variable>
+      <variable name="CONFIG"           type="string">{CONFIG}   </variable>
+      <variable name="CASE"             type="string">{CASE} </variable>
     </file>
 
     <!-- ########    U-GRID    ########  -->
     <file id="file12" name_suffix="_gridU" description="ocean U grid variables" >
       <field field_ref="uoce"         name="vozocrtx"       long_name="sea_water_x_velocity"      />
       <!-- -->
-      <variable name="start_date"       type="int">19950101    </variable>
+      <variable name="start_date"       type="int">{NDATE0}    </variable>
       <variable name="output_frequency" type="string">6h       </variable>
-      <variable name="CONFIG"           type="string">CREG025 </variable>
-      <variable name="CASE"             type="string">ILBOXNN   </variable>
+      <variable name="CONFIG"           type="string">{CONFIG} </variable>
+      <variable name="CASE"             type="string">{CASE}   </variable>
     </file>
 
     <!-- ########    V-GRID    ########  -->
     <file id="file13" name_suffix="_gridV" description="ocean V grid variables" >
       <field field_ref="voce"         name="vomecrty"       long_name="sea_water_y_velocity"      />
       <!-- -->
-      <variable name="start_date"       type="int">19950101    </variable>
+      <variable name="start_date"       type="int">{NDATE0}    </variable>
       <variable name="output_frequency" type="string">6h       </variable>
-      <variable name="CONFIG"           type="string">CREG025 </variable>
-      <variable name="CASE"             type="string">ILBOXNN   </variable>
+      <variable name="CONFIG"           type="string">{CONFIG} </variable>
+      <variable name="CASE"             type="string">{CASE}   </variable>
     </file>
 
     <!-- ########    W-GRID    ########  -->
     <file id="file14" name_suffix="_gridW" description="ocean W grid variables" >
       <field field_ref="woce"         name="vovecrtz"       long_name="sea_water_z_velocity"            />
       <field field_ref="avt"          name="votkeavt"       long_name="ocean_vertical_heat_diffusivity" />
-      <field field_ref="avs"          name="votkeavs"       long_name="ocean_vertical_salt_diffusivity" />
-      <field field_ref="avm"          name="avm"            long_name="vertical eddy viscosity"         />
+      <!-- <field field_ref="avs"          name="votkeavs"       long_name="ocean_vertical_salt_diffusivity" /> -->
+      <!-- <field field_ref="avm"          name="avm"            long_name="vertical eddy viscosity"         /> -->
       <!-- -->
-      <variable name="start_date"       type="int">19950101    </variable>
+      <variable name="start_date"       type="int">{NDATE0}    </variable>
       <variable name="output_frequency" type="string">6h       </variable>
-      <variable name="CONFIG"           type="string">CREG025 </variable>
-      <variable name="CASE"             type="string">ILBOXNN   </variable>
+      <variable name="CONFIG"           type="string">{CONFIG} </variable>
+      <variable name="CASE"             type="string">{CASE}   </variable>
     </file>
 
   </file_group>

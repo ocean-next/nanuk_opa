@@ -24,10 +24,10 @@
 &namrun        !   parameters of the run
 !-----------------------------------------------------------------------
    nn_no       =       0   !  job number (no more used...)
-   cn_exp      =  'CREG025_NXSOA3-ILBOXNN'
+   cn_exp      =  'NANUK025-ILBOXNN'
    nn_it000    =    1 !  first time step
-   nn_itend    =    480 !  last  time step (std 5475)
-   nn_date0    =    19950101 !  date at nit_0000 (format yyyymmdd) used if ln_rstart=F or (ln_rstart=T and nn_rstctl=0 or 1)
+   nn_itend    =    960 !  last  time step (std 5475)
+   nn_date0    =   19950101 !  date at nit_0000 (format yyyymmdd) used if ln_rstart=F or (ln_rstart=T and nn_rstctl=0 or 1)
    nn_leapy    =       1    !  Leap year calendar (1) or not (0)
    ln_rstart   = .false.  !  start from rest (F) or from a restart file (T)
    nn_euler    =       1    !  = 0 : start with forward time step if ln_rstart=T  #lulu
@@ -40,8 +40,10 @@
    cn_ocerst_out = 'restart_oce'
    cn_ocerst_outdir = "."      !  directory in which to write output ocean restarts
    nn_istate   =   0    !  output the initial state (1) or not (0)
-   nn_stock    =   480   !5d at dt=900  frequency of creation of a restart file (modulo referenced to 1)
-   nn_write    =   480   !5d at dt=900  frequency of write in the output file   (modulo referenced to nn_it000)
+   nn_stock    =   960   !10d at dt=900  frequency of creation of a restart file (modulo referenced to 1)
+   nn_write    =   960   !10d at dt=900  frequency of write in the output file   (modulo referenced to nn_it000)
+!   nn_stock    =   480   !5d at dt=900  frequency of creation of a restart file (modulo referenced to 1)
+!   nn_write    =   480   !5d at dt=900  frequency of write in the output file   (modulo referenced to nn_it000)
 !   nn_stock    =   2880   !30d at dt=900  frequency of creation of a restart file (modulo referenced to 1)
 !   nn_write    =   2880   !30d at dt=900  frequency of write in the output file   (modulo referenced to nn_it000)
 !   nn_stock    =   35040   !1Y at dt=900  frequency of creation of a restart file (modulo referenced to 1)
@@ -66,7 +68,7 @@
 !-----------------------------------------------------------------------
 &namcfg     !   parameters of the configuration
 !-----------------------------------------------------------------------
-   cp_cfg      =  "creg"               !  name of the configuration
+   cp_cfg      =  "nanuk"              !  name of the configuration
    cp_cfz      =  "no zoom"            !  name of the zoom of configuration
    jp_cfg      =       025             !  resolution of the configuration
    jpidta      =     528               !  1st lateral dimension ( >= jpi )
