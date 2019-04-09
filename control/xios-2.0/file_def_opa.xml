@@ -3,21 +3,21 @@
     =                                           output files definition                                        =
     =                                            Define your own files                                         =
     =                                         put the variables you want...                                    =
+    
+                          MIND EVERYTHING between "{....}" !!!! Need to be parsed before use !!!
+
     ============================================================================================================
 -->
 
-<!-- <file_definition type="multiple_file" name="{SAVDIR}/@expname@_@freq@_@startdate@_@enddate@" sync_freq="1d" min_digits="4"> -->
 <file_definition type="multiple_file" name="{SAVDIR}/@expname@_@freq@" sync_freq="1d" min_digits="4">
 
   <file_group id="2h" output_freq="2h"  output_level="10" enabled=".TRUE."/> <!-- 2h files -->
   <file_group id="3h" output_freq="3h"  output_level="10" enabled=".TRUE." /> <!-- 3h files -->
   <file_group id="4h" output_freq="4h"  output_level="10" enabled=".TRUE."/> <!-- 4h files -->
 
-
-
   <!--  ####################   2D fields saved at 6-hourly frequency ################################ -->
 
-  <file_group id="6h" output_freq="6h" split_freq="5d" output_level="10" enabled=".TRUE.">
+  <file_group id="6h" output_freq="6h" split_freq="1mo" output_level="10" enabled=".TRUE.">
 
     <!-- ########    T-GRID 2D fields   ########  -->
     <file id="file1" name_suffix="_gridT-2D" description="ocean T grid variables" >
@@ -60,7 +60,7 @@
     <!-- ########    FLXT-GRID    ########  -->
     <file id="file5" name_suffix="_flxT" description="surface fluxes variables" > <!-- time step automaticaly defined based on nn_fsbc -->
       <field field_ref="empmr"        name="empmr"      long_name="water_flux_into_sea_water"                     />
-      <field field_ref="snowpre"      name="snowpre"    long_name="Snow precipitation"                            />
+      <!-- <field field_ref="snowpre"      name="snowpre"    long_name="Snow precipitation"                       /> --> <!-- LB: snow is only a neXtSIM matter! -->
       <field field_ref="runoffs"      name="runoffs"    long_name="River Runoffs"                                 />
       <field field_ref="saltflx"      name="sfx"        long_name="salt flux total"                               />
       <field field_ref="erp"          name="wfcorr"     long_name="water_flux_correction"               level="1" />
@@ -82,13 +82,13 @@
 
   </file_group>
 
-  
+
 
 
   <!--  ####################   3D fields saved at daily frequency ################################ -->
 
-  <file_group id="1d" output_freq="1d" split_freq="5d" output_level="10" enabled=".TRUE."> <!-- 1d files -->
-    
+  <file_group id="1d" output_freq="1d" split_freq="1mo" output_level="10" enabled=".TRUE."> <!-- 1d files -->
+
     <!-- ########    T-GRID    ########  -->
     <file id="file11" name_suffix="_gridT" description="ocean T grid variables" >
       <field field_ref="toce"         name="votemper"       long_name="sea_water_potential_temperature"                   />

@@ -24,9 +24,9 @@
 &namrun        !   parameters of the run
 !-----------------------------------------------------------------------
    nn_no       =       0   !  job number (no more used...)
-   cn_exp      =  'NANUK025-ILBOXNN'
+   cn_exp      =  'NANUK025-ILBOX00'
    nn_it000    =    1 !  first time step
-   nn_itend    =    960 !  last  time step (std 5475)
+   nn_itend    =    35040 !  last  time step (std 5475)
    nn_date0    =   19950101 !  date at nit_0000 (format yyyymmdd) used if ln_rstart=F or (ln_rstart=T and nn_rstctl=0 or 1)
    nn_leapy    =       1    !  Leap year calendar (1) or not (0)
    ln_rstart   = .false.  !  start from rest (F) or from a restart file (T)
@@ -38,16 +38,16 @@
    cn_ocerst_in    = ''
    cn_ocerst_indir = '.'   !  directory from which to read input ocean restarts
    cn_ocerst_out = 'restart_oce'
-   cn_ocerst_outdir = "."      !  directory in which to write output ocean restarts
+   cn_ocerst_outdir = '/home3/datawork/lbrodeau/NANUK025/NANUK025-ILBOX00-R/opa/00035040'      !  directory in which to write output ocean restarts
    nn_istate   =   0    !  output the initial state (1) or not (0)
-   nn_stock    =   960   !10d at dt=900  frequency of creation of a restart file (modulo referenced to 1)
-   nn_write    =   960   !10d at dt=900  frequency of write in the output file   (modulo referenced to nn_it000)
+!   nn_stock    =   960   !10d at dt=900  frequency of creation of a restart file (modulo referenced to 1)
+!   nn_write    =   960   !10d at dt=900  frequency of write in the output file   (modulo referenced to nn_it000)
 !   nn_stock    =   480   !5d at dt=900  frequency of creation of a restart file (modulo referenced to 1)
 !   nn_write    =   480   !5d at dt=900  frequency of write in the output file   (modulo referenced to nn_it000)
 !   nn_stock    =   2880   !30d at dt=900  frequency of creation of a restart file (modulo referenced to 1)
 !   nn_write    =   2880   !30d at dt=900  frequency of write in the output file   (modulo referenced to nn_it000)
-!   nn_stock    =   35040   !1Y at dt=900  frequency of creation of a restart file (modulo referenced to 1)
-!   nn_write    =   35040   !1Y at dt=900  frequency of write in the output file   (modulo referenced to nn_it000)
+   nn_stock    =   35040   !1Y at dt=900  frequency of creation of a restart file (modulo referenced to 1)
+   nn_write    =   35040   !1Y at dt=900  frequency of write in the output file   (modulo referenced to nn_it000)
    ln_dimgnnn  = .false.   !  DIMG file format: 1 file for all processors (F) or by processor (T)
    ln_mskland  = .false.   !  mask land points in NetCDF outputs (costly: + ~15%)
    ln_cfmeta   = .false.   !  output additional data to netCDF files required for compliance with the CF metadata standard
@@ -815,9 +815,9 @@
                            !  buffer blocking send or immediate non-blocking sends, resp.
    nn_buffer   =   0       !  size in bytes of exported buffer ('B' case), 0 no exportation
    ln_nnogather=  .false.  !  activate code to avoid mpi_allgather use at the northfold
-   jpni        =   6  !  jpni   number of processors following i (set automatically if < 1)
+   jpni        =   10  !  jpni   number of processors following i (set automatically if < 1)
    jpnj        =   10  !  jpnj   number of processors following j (set automatically if < 1)
-   jpnij       =   54 !  jpnij  number of local domains (set automatically if < 1)
+   jpnij       =   81 !  jpnij  number of local domains (set automatically if < 1)
 /
 !-----------------------------------------------------------------------
 &namctl        !   Control prints & Benchmark

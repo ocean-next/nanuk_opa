@@ -2,14 +2,15 @@
 #
 #      Input file for OASIS3
 # 
-#      This version is for use with ECHAM5 fluxes and
-#      surface conditions computed in mpi-om.
+#     NANUK aka "OPA -- OASIS -- neXtSIM" on CREG025 domain
+#   
+#     2019: E. Olason & L. Brodeau
 #
-#      The file will be edited in the run-script to update it for the 
-#      actual integration period and grid dimensions.
+#    Important:
+#    ----------
+#   <RUNTIME> and <DT_CPL> have to be replaced by the length of the simulation (s) and
+#   the coupling frequency (s), respectively.
 #
-#      Modified : S. Legutke    DKRZ             29.12.02
-#                 - updated from 2.4.t version
 #
 ###############################################################################
 #  
@@ -27,12 +28,12 @@
 #
 ###############################################################################
 # 
-# RUNTIME (<I8)
+# RUNTIME (I8.8) !!!
 #         total simulated time for the actual run in seconds
 #         the value will be set before the actual integration
 #
  $RUNTIME
-           31536000
+           <RUNTIME>
  $END
 #
 ###############################################################################
@@ -53,8 +54,8 @@
 #
 # --- start Field 1 --- Sea_surface_temperature [K;K]
 #
-O_SSTSST I_SST 1 900  1 ocean.nc EXPORTED
-528 603  528 603 tor2 tor2  SEQ=1 LAG=900
+O_SSTSST I_SST 1 <DT_CPL>  1 ocean.nc EXPORTED
+528 603  528 603 tor2 tor2  SEQ=1 LAG=<DT_CPL>
 P  2  P  2
 #
 # List of analyses
@@ -69,8 +70,8 @@ AVERAGE
 #
 # --- start Field 2 --- sea_surface_salinity  [PSU;PSU]
 #
-O_SSSal  I_SSS 2 900  1 ocean.nc EXPORTED
-528 603  528 603 tor2 tor2  SEQ=1 LAG=900
+O_SSSal  I_SSS 2 <DT_CPL>  1 ocean.nc EXPORTED
+528 603  528 603 tor2 tor2  SEQ=1 LAG=<DT_CPL>
 P  2  P  2
 #
 # List of analyses
@@ -85,8 +86,8 @@ AVERAGE
 #
 # --- start Field 3 --- zonal_current  [m/s;m/s]
 #
-O_OCurx1 I_Uocn 2 900  1 ocean.nc EXPORTED
-528 603  528 603 uor2 uor2  SEQ=1 LAG=900
+O_OCurx1 I_Uocn 2 <DT_CPL>  1 ocean.nc EXPORTED
+528 603  528 603 uor2 uor2  SEQ=1 LAG=<DT_CPL>
 P  2  P  2
 #
 # List of analyses
@@ -102,8 +103,8 @@ AVERAGE
 #
 # --- start Field 4 --- meridional_current  [m/s;m/s]
 #
-O_OCury1 I_Vocn 2 900  1 ocean.nc EXPORTED
-528 603  528 603 vor2 vor2  SEQ=1 LAG=900
+O_OCury1 I_Vocn 2 <DT_CPL>  1 ocean.nc EXPORTED
+528 603  528 603 vor2 vor2  SEQ=1 LAG=<DT_CPL>
 P  2  P  2
 #
 # List of analyses
@@ -119,8 +120,8 @@ AVERAGE
 #
 # --- start Field 5 --- SSHeight  [m;m]
 #
-O_SSHght I_SSH 2 900  1 ocean.nc EXPORTED
-528 603  528 603 tor2 tor2  SEQ=1 LAG=900
+O_SSHght I_SSH 2 <DT_CPL>  1 ocean.nc EXPORTED
+528 603  528 603 tor2 tor2  SEQ=1 LAG=<DT_CPL>
 P  2  P  2
 #
 # List of analyses
@@ -136,8 +137,8 @@ AVERAGE
 #
 # --- start Field 6 --- First level depth (vvl only)
 #
-# O_E3T1st I_MLD 2 900  1 ocean.nc EXPORTED
-# 528 603  528 603 tor2 tor2  SEQ=1 LAG=900
+# O_E3T1st I_MLD 2 <DT_CPL>  1 ocean.nc EXPORTED
+# 528 603  528 603 tor2 tor2  SEQ=1 LAG=<DT_CPL>
 # P  2  P  2
 #
 # List of analyses
@@ -152,8 +153,8 @@ AVERAGE
 #
 # --- start Field 7 --- Fraction of solar net radiation absorbed in the first ocean level
 #
-O_FraQsr I_FrcQsr 2 900  1 ocean.nc EXPORTED
-528 603  528 603 tor2 tor2  SEQ=1 LAG=900
+O_FraQsr I_FrcQsr 2 <DT_CPL>  1 ocean.nc EXPORTED
+528 603  528 603 tor2 tor2  SEQ=1 LAG=<DT_CPL>
 P  2  P  2
 #
 # List of analyses
@@ -163,100 +164,93 @@ LOCTRANS
 AVERAGE
 #
 #
-# --- end field 6 ---
+# --- end field 7 ---
+#
+#
+#
+#
+#
+#
+#
 ############################################################################
 #                      ICE  --->>>  OCEAN
 ############################################################################
 #
-# --- start Field 6 --- eastward  wind stress over ocean at U point
+# --- start Field 8 --- eastward  wind stress over ocean at U point
 #
-I_taux O_OTaux1   23  900  1  ice.nc  EXPORTED
-528 603  528 603 uor2 uor2  SEQ=1 LAG=900
+I_taux O_OTaux1   23  <DT_CPL>  1  ice.nc  EXPORTED
+528 603  528 603 uor2 uor2  SEQ=1 LAG=<DT_CPL>
 P  2  P  2
 #
  LOCTRANS 
 #
 INSTANT
-#
-# --- end field 6 ---
-#
-#########################################################################
-#
-# --- start Field 7 --- northward wind stress over ocean at V point
-#
-I_tauy O_OTauy1   24  900  1  ice.nc  EXPORTED
-528 603  528 603 vor2 vor2  SEQ=1 LAG=900
-P  2  P  2
-#
- LOCTRANS 
-#
-INSTANT
-#
-# --- end field 7 ---
-#
-############################################################################
-#
-# --- start Field 8 --- total solid precip (snow)
-#
-I_fwflux OOEvaMPr 28 900  1  ice.nc  EXPORTED
-528 603  528 603 tor2 tor2  SEQ=1 LAG=900
-P  2  P  2
-#
- LOCTRANS 
-#
-INSTANT
-#
 #
 # --- end field 8 ---
 #
-###########################################################################
+#########################################################################
 #
-# --- start Field 9 --- Total Non Solar 
+# --- start Field 9 --- northward wind stress over ocean at V point
 #
-I_rsnos O_QnsOce 6  900  1  ice.nc  EXPORTED
-528 603  528 603 tor2 tor2  SEQ=1 LAG=900
+I_tauy O_OTauy1   24  <DT_CPL>  1  ice.nc  EXPORTED
+528 603  528 603 vor2 vor2  SEQ=1 LAG=<DT_CPL>
 P  2  P  2
 #
  LOCTRANS 
 #
 INSTANT
-#
 #
 # --- end field 9 ---
 #
 ############################################################################
 #
-# --- start Field 10 --- Total Solar 
+# --- start Field 10 --- Total E-P -> [ Evaporation - (rain + snow) ]
 #
-I_rsso O_QsrOce 7 900  1  ice.nc  EXPORTED
-528 603  528 603 tor2 tor2  SEQ=1 LAG=900
+I_fwflux OOEvaMPr 28 <DT_CPL>  1  ice.nc  EXPORTED
+528 603  528 603 tor2 tor2  SEQ=1 LAG=<DT_CPL>
 P  2  P  2
 #
  LOCTRANS 
 #
 INSTANT
+#
 #
 # --- end field 10 ---
-##########################################################################
 #
-# --- start Field 11 --- Salt flux
+###########################################################################
 #
-I_sfi O_SFLX 7 900  1  ice.nc  EXPORTED
-528 603  528 603 tor2 tor2  SEQ=1 LAG=900
+# --- start Field 11 --- Total Non Solar 
+#
+I_rsnos O_QnsOce 6  <DT_CPL>  1  ice.nc  EXPORTED
+528 603  528 603 tor2 tor2  SEQ=1 LAG=<DT_CPL>
 P  2  P  2
 #
  LOCTRANS 
 #
 INSTANT
+#
 #
 # --- end field 11 ---
 #
+############################################################################
+#
+# --- start Field 12 --- Total Solar 
+#
+I_rsso O_QsrOce 7 <DT_CPL>  1  ice.nc  EXPORTED
+528 603  528 603 tor2 tor2  SEQ=1 LAG=<DT_CPL>
+P  2  P  2
+#
+ LOCTRANS 
+#
+INSTANT
+#
+# --- end field 12 ---
 ##########################################################################
 #
-# --- start Field 13 --- Wind stress module       
+# --- start Field 13 --- Salt flux
 #
-I_taumod  O_TauMod 7 900  1  ice.nc  EXPORTED
-528 603  528 603 tor2 tor2  SEQ=1 LAG=900
+I_sfi O_SFLX 7 <DT_CPL>  1  ice.nc  EXPORTED
+528 603  528 603 tor2 tor2  SEQ=1 LAG=<DT_CPL>
 P  2  P  2
 #
  LOCTRANS 
@@ -264,18 +258,32 @@ P  2  P  2
 INSTANT
 #
 # --- end field 13 ---
+#
 ##########################################################################
 #
-# --- start Field 14 ---  Sea ice cover      
+# --- start Field 14 --- Wind stress module       
 #
-I_sic RIceFrc 7 900  1  ice.nc  EXPORTED
-528 603  528 603 tor2 tor2  SEQ=1 LAG=900
+I_taumod  O_TauMod 7 <DT_CPL>  1  ice.nc  EXPORTED
+528 603  528 603 tor2 tor2  SEQ=1 LAG=<DT_CPL>
 P  2  P  2
 #
  LOCTRANS 
 #
 INSTANT
 #
-# --- end field 13 ---
+# --- end field 14 ---
+##########################################################################
+#
+# --- start Field 15 ---  Sea ice cover      
+#
+I_sic RIceFrc 7 <DT_CPL>  1  ice.nc  EXPORTED
+528 603  528 603 tor2 tor2  SEQ=1 LAG=<DT_CPL>
+P  2  P  2
+#
+ LOCTRANS 
+#
+INSTANT
+#
+# --- end field 15 ---
 ##########################################################################
  $END
