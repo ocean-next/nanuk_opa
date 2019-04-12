@@ -59,7 +59,7 @@
 
     <!-- ########    FLXT-GRID    ########  -->
     <file id="file5" name_suffix="_flxT" description="surface fluxes variables" > <!-- time step automaticaly defined based on nn_fsbc -->
-      <field field_ref="empmr"        name="empmr"      long_name="water_flux_into_sea_water"                     />
+      <field field_ref="empmr"        name="sfw"        long_name="water_flux_into_sea_water_without_runoffs"     /> <!-- LB: AVOID CONFUSION -->
       <!-- <field field_ref="snowpre"      name="snowpre"    long_name="Snow precipitation"                       /> --> <!-- LB: snow is only a neXtSIM matter! -->
       <field field_ref="runoffs"      name="runoffs"    long_name="River Runoffs"                                 />
       <field field_ref="saltflx"      name="sfx"        long_name="salt flux total"                               />
