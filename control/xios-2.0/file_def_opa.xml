@@ -123,7 +123,7 @@
 
     <!-- ########    W-GRID    ########  -->
     <file id="file14" name_suffix="_gridW" description="ocean W grid variables" >
-      <field field_ref="woce"         name="vovecrtz"       long_name="sea_water_z_velocity"            />
+      <!-- <field field_ref="woce"         name="vovecrtz"       long_name="sea_water_z_velocity"            /> -->
       <field field_ref="avt"          name="votkeavt"       long_name="ocean_vertical_heat_diffusivity" />
       <!-- <field field_ref="avs"          name="votkeavs"       long_name="ocean_vertical_salt_diffusivity" /> -->
       <!-- <field field_ref="avm"          name="avm"            long_name="vertical eddy viscosity"         /> -->
