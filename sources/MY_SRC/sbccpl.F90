@@ -1013,7 +1013,7 @@ CONTAINS
          ENDIF
          !
          ! salt flux over the ocean (received by opa in case of opa <-> nextsim coupling)
-         IF( srcv(jpr_sflx )%laction )   sfx(:,:) = frcv(jpr_sflx  )%z3(:,:,1)
+         IF( srcv(jpr_sflx )%laction )   sfx(:,:) = 1000.*frcv(jpr_sflx  )%z3(:,:,1) !LB: 1000 because OASIS sends kg/m^2/s while "sfx" in NEMO is 10-3*kg/m^2/s == PSU*kg/m2/s which should == g/m2/s !
          ! Ice cover  (received by opa in case of opa <-> nextsim coupling)
          IF( srcv(jpr_fice )%laction )   fr_i(:,:) = frcv(jpr_fice )%z3(:,:,1)
          !

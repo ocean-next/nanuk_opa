@@ -62,7 +62,7 @@
       <field field_ref="empmr"        name="sfw"        long_name="net surface freshwater flux into seawater: P - E + R + SeaIceContrib + wfcorr" /> <!-- LB: AVOID CONFUSION -->
       <!-- <field field_ref="snowpre"      name="snowpre"    long_name="Snow precipitation"                       /> --> <!-- LB: snow is only a neXtSIM matter! -->
       <field field_ref="runoffs"      name="runoffs"    long_name="River Runoffs"                                 />
-      <field field_ref="saltflx"      name="sfx"        long_name="salt flux total"                               />
+      <field field_ref="saltflx"      name="sfx"        long_name="Downward salt flux due to sea-ice melt/freeze" />   <!-- LB: array in OPA is called "sfx", so back to LOGIC!!! -->
       <field field_ref="erp"          name="wfcorr"     long_name="water_flux_correction"               level="1" />
       <!-- -->
       <field field_ref="ice_cover"    name="ice_cover"      long_name="sea-ice fraction as received from neXtSIM"         />   <!-- LB -->

@@ -1,9 +1,9 @@
 ##############################################################################
 #
 #      Input file for OASIS3
-# 
+#
 #     NANUK aka "OPA -- OASIS -- neXtSIM" on CREG025 (source and target) domain
-#   
+#
 #     2019: E. Olason & L. Brodeau
 #
 #    Important:
@@ -13,7 +13,7 @@
 #
 #
 ###############################################################################
-#  
+#
 #      Input delimiters have to occupy position 1 to 9 !
 #      No blank lines allowed !
 #      Length of input lines <= 80 !
@@ -139,7 +139,7 @@ I_taux O_OTaux1   23  <DT_CPL>  1  ice.nc  EXPORTED
 R  0  R  0
 #
 LOCTRANS
-INSTANT
+AVERAGE
 #
 # --- end field 7 ---
 #
@@ -152,7 +152,7 @@ I_tauy O_OTauy1   24  <DT_CPL>  1  ice.nc  EXPORTED
 R  0  R  0
 #
 LOCTRANS
-INSTANT
+AVERAGE
 #
 # --- end field 8 ---
 #
@@ -165,35 +165,35 @@ I_fwflux OOEvaMPr 28 <DT_CPL>  1  ice.nc  EXPORTED
 R  0  R  0
 #
 LOCTRANS
-ACCUMUL
+AVERAGE
 #
 #
 # --- end field 9 ---
 #
 ###########################################################################
 #
-# --- start Field 10 --- Total Non Solar 
+# --- start Field 10 --- Total Non Solar
 #
 I_rsnos O_QnsOce 6  <DT_CPL>  1  ice.nc  EXPORTED
 528 603  528 603 tor2 tor2  SEQ=1 LAG=<DT_CPL>
 R  0  R  0
 #
 LOCTRANS
-ACCUMUL
+AVERAGE
 #
 #
 # --- end field 10 ---
 #
 ############################################################################
 #
-# --- start Field 11 --- Total Solar 
+# --- start Field 11 --- Total Solar
 #
 I_rsso O_QsrOce 7 <DT_CPL>  1  ice.nc  EXPORTED
 528 603  528 603 tor2 tor2  SEQ=1 LAG=<DT_CPL>
 R  0  R  0
 #
 LOCTRANS
-ACCUMUL
+AVERAGE
 #
 # --- end field 11 ---
 ##########################################################################
@@ -205,25 +205,25 @@ I_sfi O_SFLX 7 <DT_CPL>  1  ice.nc  EXPORTED
 R  0  R  0
 #
 LOCTRANS
-ACCUMUL
+AVERAGE
 #
 # --- end field 12 ---
 #
 ##########################################################################
 #
-# --- start Field 13 --- Wind stress module       
+# --- start Field 13 --- Wind stress module
 #
 I_taumod  O_TauMod 7 <DT_CPL>  1  ice.nc  EXPORTED
 528 603  528 603 tor2 tor2  SEQ=1 LAG=<DT_CPL>
 R  0  R  0
 #
 LOCTRANS
-INSTANT
+AVERAGE
 #
 # --- end field 13 ---
 ##########################################################################
 #
-# --- start Field 14 ---  Sea ice cover      
+# --- start Field 14 ---  Sea ice cover
 #
 I_sic RIceFrc 7 <DT_CPL>  1  ice.nc  EXPORTED
 528 603  528 603 tor2 tor2  SEQ=1 LAG=<DT_CPL>
