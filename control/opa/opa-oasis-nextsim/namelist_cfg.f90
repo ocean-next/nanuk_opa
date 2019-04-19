@@ -24,28 +24,22 @@
 &namrun        !   parameters of the run
 !-----------------------------------------------------------------------
    nn_no       =       0   !  job number (no more used...)
-   cn_exp      =  'NANUK025-ILBOX00'
-   nn_it000    =    1 !  first time step
-   nn_itend    =    35040 !  last  time step (std 5475)
-   nn_date0    =   19950101 !  date at nit_0000 (format yyyymmdd) used if ln_rstart=F or (ln_rstart=T and nn_rstctl=0 or 1)
+   cn_exp      =  '<CONFCASE>'
+   nn_it000    =    <IT000> !  first time step
+   nn_itend    =    <ITEND> !  last  time step (std 5475)
+   nn_date0    =   <NDATE0> !  date at nit_0000 (format yyyymmdd) used if ln_rstart=F or (ln_rstart=T and nn_rstctl=0 or 1)
    nn_leapy    =       1    !  Leap year calendar (1) or not (0)
-   ln_rstart   = .false.  !  start from rest (F) or from a restart file (T)
+   ln_rstart   = .<RSTRT>.  !  start from rest (F) or from a restart file (T)
    nn_euler    =       1    !  = 0 : start with forward time step if ln_rstart=T  #lulu
-   nn_rstctl   =  2   !  restart control => activated only if ln_rstart = T
+   nn_rstctl   =  <IRCTL>   !  restart control => activated only if ln_rstart = T
                             !    = 0 nn_date0 read in namelist ; nn_it000 : read in namelist
                             !    = 1 nn_date0 read in namelist ; nn_it000 : check consistancy between namelist and restart
                             !    = 2 nn_date0 read in restart  ; nn_it000 : check consistancy between namelist and restart
-   cn_ocerst_in    = ''
-   cn_ocerst_indir = '.'   !  directory from which to read input ocean restarts
+   cn_ocerst_in    = '<CN_OCERST_IN>'
+   cn_ocerst_indir = '<CN_OCERST_INDIR>'   !  directory from which to read input ocean restarts
    cn_ocerst_out = 'restart_oce'
-   cn_ocerst_outdir = '/home3/datawork/lbrodeau/NANUK025/NANUK025-ILBOX00-R/opa/00035040'      !  directory in which to write output ocean restarts
+   cn_ocerst_outdir = '<CN_OCERST_OUTDIR>'      !  directory in which to write output ocean restarts
    nn_istate   =   0    !  output the initial state (1) or not (0)
-!   nn_stock    =   960   !10d at dt=900  frequency of creation of a restart file (modulo referenced to 1)
-!   nn_write    =   960   !10d at dt=900  frequency of write in the output file   (modulo referenced to nn_it000)
-!   nn_stock    =   480   !5d at dt=900  frequency of creation of a restart file (modulo referenced to 1)
-!   nn_write    =   480   !5d at dt=900  frequency of write in the output file   (modulo referenced to nn_it000)
-!   nn_stock    =   2880   !30d at dt=900  frequency of creation of a restart file (modulo referenced to 1)
-!   nn_write    =   2880   !30d at dt=900  frequency of write in the output file   (modulo referenced to nn_it000)
    nn_stock    =   35040   !1Y at dt=900  frequency of creation of a restart file (modulo referenced to 1)
    nn_write    =   35040   !1Y at dt=900  frequency of write in the output file   (modulo referenced to nn_it000)
    ln_dimgnnn  = .false.   !  DIMG file format: 1 file for all processors (F) or by processor (T)
@@ -111,6 +105,7 @@
    rn_e3zps_rat=    0.2    !  rn_e3zps_min and rn_e3zps_rat*e3t, with 0<rn_e3zps_rat<1
                            !
    rn_rdt      =  900.     !  time step for the dynamics (and tracer if nn_acc=0)
+!!   rn_rdt      =  450.     !  time step for the dynamics (and tracer if nn_acc=0)
    rn_atfp     =    0.1    !  asselin time filter parameter
    nn_acc      =    0      !  acceleration of convergence : =1      used, rdt < rdttra(k)
                                  !                          =0, not used, rdt = rdttra
@@ -151,8 +146,8 @@
                                        !  a user defined maximum courant number (rn_bt_cmax)
    nn_baro       =    48               !  Number of iterations of barotropic mode
                                        !  during rn_rdt seconds. Only used if ln_bt_nn_auto=F
-   rn_bt_cmax    =    0.65             ! #LOLO! Maximum courant number allowed if ln_bt_nn_auto=T  #lulu
-   nn_bt_flt     =    2                ! #LOLO! Time filter choice ( => Jouano p.c. ?)
+   rn_bt_cmax    =    0.7              ! #LOLO! Maximum courant number allowed if ln_bt_nn_auto=T  #lulu
+   nn_bt_flt     =    1                ! #LOLO! Time filter choice ( => Jouano p.c. ?)
                                        !  = 0 None
                                        !  = 1 Boxcar over   nn_baro barotropic steps
                                        !  = 2 Boxcar over 2*nn_baro     "        "
@@ -176,7 +171,7 @@
    sn_sal_dmp  = 'woa09_salinity_monthly_1deg_s_an_CMA_drowned_Ex_L75'    ,    -12     ,  's_an'   ,    .true.   , .true. , 'yearly'   , 'reshape_WOA09_REG1toCREG025_bilin.nc'  ,   ''    ,    ''
    !
    cn_dir        = './'     !  root directory for the location of the runoff files
-   ln_tsd_init   = .true.  ! Initialisation of ocean T & S with T &S input data (T) or not (F)
+   ln_tsd_init   = .<TSD_INIT>.  ! Initialisation of ocean T & S with T &S input data (T) or not (F)
    ln_tsd_tradmp = .true.   !  damping of ocean T & S toward T &S input data (T) or not (F)
 /
 !!======================================================================
@@ -709,7 +704,7 @@
    nn_havtb    =    0      !  horizontal shape for avtb (=1) or not (=0)
    ln_zdfevd   = .true.    !  enhanced vertical diffusion (evd) (T) or not (F)
    nn_evdm     =    1      !  evd apply on tracer (=0) or on tracer and momentum (=1)
-   rn_avevd    =  10.     !  evd mixing coefficient [m2/s]
+   rn_avevd    =   10.     !LOLO  evd mixing coefficient [m2/s]
    ln_zdfnpc   = .false.   !  Non-Penetrative Convective algorithm (T) or not (F)
    nn_npc      =    1            !  frequency of application of npc
    nn_npcp     =  365            !  npc control print frequency
@@ -815,9 +810,9 @@
                            !  buffer blocking send or immediate non-blocking sends, resp.
    nn_buffer   =   0       !  size in bytes of exported buffer ('B' case), 0 no exportation
    ln_nnogather=  .false.  !  activate code to avoid mpi_allgather use at the northfold
-   jpni        =   10  !  jpni   number of processors following i (set automatically if < 1)
-   jpnj        =   10  !  jpnj   number of processors following j (set automatically if < 1)
-   jpnij       =   81 !  jpnij  number of local domains (set automatically if < 1)
+   jpni        =   <JPNI>  !  jpni   number of processors following i (set automatically if < 1)
+   jpnj        =   <JPNJ>  !  jpnj   number of processors following j (set automatically if < 1)
+   jpnij       =   <JPNIJ> !  jpnij  number of local domains (set automatically if < 1)
 /
 !-----------------------------------------------------------------------
 &namctl        !   Control prints & Benchmark
