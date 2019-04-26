@@ -105,7 +105,6 @@
    rn_e3zps_rat=    0.2    !  rn_e3zps_min and rn_e3zps_rat*e3t, with 0<rn_e3zps_rat<1
                            !
    rn_rdt      =  900.     !  time step for the dynamics (and tracer if nn_acc=0)
-!!   rn_rdt      =  450.     !  time step for the dynamics (and tracer if nn_acc=0)
    rn_atfp     =    0.1    !  asselin time filter parameter
    nn_acc      =    0      !  acceleration of convergence : =1      used, rdt < rdttra(k)
                                  !                          =0, not used, rdt = rdttra
@@ -146,8 +145,8 @@
                                        !  a user defined maximum courant number (rn_bt_cmax)
    nn_baro       =    48               !  Number of iterations of barotropic mode
                                        !  during rn_rdt seconds. Only used if ln_bt_nn_auto=F
-   rn_bt_cmax    =    0.7              ! #LOLO! Maximum courant number allowed if ln_bt_nn_auto=T  #lulu
-   nn_bt_flt     =    1                ! #LOLO! Time filter choice ( => Jouano p.c. ?)
+   rn_bt_cmax    =    0.7              !  Maximum courant number allowed if ln_bt_nn_auto=T
+   nn_bt_flt     =    1                !  Time filter choice
                                        !  = 0 None
                                        !  = 1 Boxcar over   nn_baro barotropic steps
                                        !  = 2 Boxcar over 2*nn_baro     "        "
@@ -171,7 +170,7 @@
    sn_sal_dmp  = 'woa09_salinity_monthly_1deg_s_an_CMA_drowned_Ex_L75'    ,    -12     ,  's_an'   ,    .true.   , .true. , 'yearly'   , 'reshape_WOA09_REG1toCREG025_bilin.nc'  ,   ''    ,    ''
    !
    cn_dir        = './'     !  root directory for the location of the runoff files
-   ln_tsd_init   = .<TSD_INIT>.  ! Initialisation of ocean T & S with T &S input data (T) or not (F)
+   ln_tsd_init   = .<TSD_INIT>.   ! Initialisation of ocean T & S with T &S input data (T) or not (F)
    ln_tsd_tradmp = .true.   !  damping of ocean T & S toward T &S input data (T) or not (F)
 /
 !!======================================================================
@@ -704,7 +703,7 @@
    nn_havtb    =    0      !  horizontal shape for avtb (=1) or not (=0)
    ln_zdfevd   = .true.    !  enhanced vertical diffusion (evd) (T) or not (F)
    nn_evdm     =    1      !  evd apply on tracer (=0) or on tracer and momentum (=1)
-   rn_avevd    =   10.     !LOLO  evd mixing coefficient [m2/s]
+   rn_avevd    =  10.      !  evd mixing coefficient [m2/s]
    ln_zdfnpc   = .false.   !  Non-Penetrative Convective algorithm (T) or not (F)
    nn_npc      =    1            !  frequency of application of npc
    nn_npcp     =  365            !  npc control print frequency

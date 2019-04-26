@@ -8,7 +8,7 @@
 !!              5 - bottom  boundary (nambfr, nambbc, nambbl)
 !!              6 - Tracer           (nameos, namtra_adv, namtra_ldf, namtra_dmp)
 !!              7 - dynamics         (namdyn_adv, namdyn_vor, namdyn_hpg, namdyn_spg, namdyn_ldf)
-!!              8 - Verical physics  (namzdf, namzdf_ric, namzdf_tke, namzdf_kpp, namzdf_ddm, namzdf_tmx)
+!!              8 - Verical physics  (namzdf, namzdf_ric, namzdf_tke, namzdf_kpp, namzdf_ddm, namzdf_tmx, namzdf_tmx_new)
 !!              9 - diagnostics      (namnc4, namtrd, namspr, namflo, namhsb, namsto)
 !!             10 - miscellaneous    (namsol, nammpp, namctl)
 !!             11 - Obs & Assim      (namobs, nam_asminc)
@@ -248,7 +248,7 @@
    nn_components = 0       !  configuration of the opa-sas OASIS coupling
                            !  =0 no opa-sas OASIS coupling: default single executable configuration
                            !  =1 opa-sas OASIS coupling: multi executable configuration, OPA component
-                           !  =2 opa-sas OASIS coupling: multi executable configuration, SAS component 
+                           !  =2 opa-sas OASIS coupling: multi executable configuration, SAS component
    ln_apr_dyn  = .false.   !  Patm gradient added in ocean & ice Eqs.   (T => fill namsbc_apr )
    nn_ice      = 3         !  =0 no ice boundary condition   ,
                            !  =1 use observed ice-cover      ,
@@ -411,7 +411,7 @@
    ln_qsr_rgb  = .false.   !  RGB (Red-Green-Blue) light penetration
    ln_qsr_2bd  = .true.    !  2 bands              light penetration
    ln_qsr_bio  = .false.   !  bio-model light penetration
-   nn_chldta   =      1    !  RGB : Chl data (=1) or cst value (=0)
+   nn_chldta   =      1    !  RGB : 2D Chl data (=1), 3D Chl data (=2) or cst value (=0)
    rn_abs      =   0.56    !  RGB & 2 bands: fraction of light (rn_si1)
    rn_si0      =   0.35    !  RGB & 2 bands: shortess depth of extinction
    rn_si1      =   23.0    !  2 bands: longest depth of extinction
