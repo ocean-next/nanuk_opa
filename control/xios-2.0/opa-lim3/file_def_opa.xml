@@ -60,6 +60,7 @@
       <field field_ref="fmmflx"       name="sisfw"      long_name="sea_ice_water_flux_into_sea_water"             />
       <field field_ref="runoffs"      name="runoffs"    long_name="River Runoffs"                                 />
       <field field_ref="precip"       name="precip"     long_name="Total precipitation"                           />
+      <field field_ref="snowpre"      name="snowpre"    long_name="Snow precipitation"                            /> 
       <field field_ref="saltflx"      name="sfx"        long_name="salt flux total"                               />
       <field field_ref="erp"          name="wfcorr"     long_name="water_flux_correction"               level="1" />
       <!-- -->
