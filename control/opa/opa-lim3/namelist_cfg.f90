@@ -248,7 +248,7 @@
    nn_components = 0       !  configuration of the opa-sas OASIS coupling
                            !  =0 no opa-sas OASIS coupling: default single executable configuration
                            !  =1 opa-sas OASIS coupling: multi executable configuration, OPA component
-                           !  =2 opa-sas OASIS coupling: multi executable configuration, SAS component 
+                           !  =2 opa-sas OASIS coupling: multi executable configuration, SAS component
    ln_apr_dyn  = .false.   !  Patm gradient added in ocean & ice Eqs.   (T => fill namsbc_apr )
    nn_ice      = 3         !  =0 no ice boundary condition   ,
                            !  =1 use observed ice-cover      ,
