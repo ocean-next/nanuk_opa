@@ -24,7 +24,7 @@
 &namrun        !   parameters of the run
 !-----------------------------------------------------------------------
    nn_no       =  NUMERO_DE_RUN         !  job number (no more used...)
-   cn_exp      =  "CREG025.L75-BCTICETWINVOL"  !  experience name
+   cn_exp      =  "CREG025.L75-BCTTWINERA5"  !  experience name
    nn_it000    =    NIT000 !  first time step
    nn_itend    =    NITEND !  last  time step (std 5475)
    nn_date0    =19900101   !  date at nit_0000 (format yyyymmdd) used if ln_rstart=F or (ln_rstart=T and nn_rstctl=0 or 1)
@@ -319,17 +319,17 @@
 !-----------------------------------------------------------------------
 &namsbc_core   !   namsbc_core  CORE bulk formulae
 !-----------------------------------------------------------------------
-!              !  file name                    ! frequency (hours) ! variable  ! time interp. !  clim  ! 'yearly'/ ! weights                            ! rotation ! land/sea mask !
-!              !                               !  (if <0  months)  !   name    !   (logical)  !  (T/F) ! 'monthly' ! filename                           ! pairing  ! filename      !
-   sn_wndi     = 'cfsr.6h.U_GRD_L103'     ,         6         , 'U_GRD_L103'     ,   .true.     , .false., 'yearly'  , 'reshape_CFSR_REG05toCREG025_bicub.nc' , 'Uwnd'   , ''
-   sn_wndj     = 'cfsr.6h.V_GRD_L103'     ,         6         , 'V_GRD_L103'     ,   .true.     , .false., 'yearly'  , 'reshape_CFSR_REG05toCREG025_bicub.nc' , 'Vwnd'   , ''
-   sn_qsr      = 'cfsr.6h.DSWRF_L1_Avg_1' ,         6         , 'DSWRF_L1_Avg_1' ,   .true.     , .false., 'yearly'  , 'reshape_CFSR_REG05toCREG025_bilin.nc' , ''       , ''
-   sn_qlw      = 'cfsr.6h.DLWRF_L1_Avg_1' ,         6         , 'DLWRF_L1_Avg_1' ,   .true.     , .false., 'yearly'  , 'reshape_CFSR_REG05toCREG025_bilin.nc' , ''       , ''
-   sn_tair     = 'cfsr.6h.TMP_L103'       ,         6         , 'TMP_L103'       ,   .true.     , .false., 'yearly'  , 'reshape_CFSR_REG05toCREG025_bilin.nc' , ''       , ''
-   sn_humi     = 'cfsr.6h.SPF_H_L103'     ,         6         , 'SPF_H_L103'     ,   .true.     , .false., 'yearly'  , 'reshape_CFSR_REG05toCREG025_bilin.nc' , ''       , ''
-   sn_prec     = 'cfsr.6h.Precip'         ,         6         , 'Precip'         ,   .true.     , .false., 'yearly'  , 'reshape_CFSR_REG05toCREG025_bilin.nc' , ''       , ''
-   sn_snow     = 'cfsr.6h.Snow'           ,         6         , 'Snow'           ,   .true.     , .false., 'yearly'  , 'reshape_CFSR_REG05toCREG025_bilin.nc' , ''       , ''
-   sn_tdif     = 'taudif_core'            ,        24         , 'taudif'  ,   .true.     , .false., 'yearly'  , 'weights_CREG025_DFS5.2_bilin_vh20161220.nc' , ''       , ''
+!              !  file name                    ! frequency (hours) ! variable  ! time interp. !  clim  ! 'yearly'/ ! weights      ! rotation ! land/sea mask !
+!              !                               !  (if <0  months)  !   name    !   (logical)  !  (T/F) ! 'monthly' ! filename     ! pairing  ! filename      !
+   sn_wndi     = 'u10_ERA5-1440x721-CREG025_gridT' ,         1     , 'u10'     ,   .true.     , .false., 'yearly'  , '' , '' , ''
+   sn_wndj     = 'v10_ERA5-1440x721-CREG025_gridT' ,         1     , 'v10'     ,   .true.     , .false., 'yearly'  , '' , '' , ''
+   sn_qsr      = 'msdwswrf_ERA5-1440x721-CREG025'  ,         1     , 'msdwswrf',   .true.     , .false., 'yearly'  , '' , '' , ''
+   sn_qlw      = 'msdwlwrf_ERA5-1440x721-CREG025'  ,         1     , 'msdwlwrf',   .true.     , .false., 'yearly'  , '' , '' , ''
+   sn_tair     = 't2m_ERA5-1440x721-CREG025'       ,         1     , 't2m'     ,   .true.     , .false., 'yearly'  , '' , '' , ''
+   sn_humi     = 'q2m_ERA5-1440x721-CREG025'       ,         1     , 'q2m'     ,   .true.     , .false., 'yearly'  , '' , '' , ''
+   sn_prec     = 'mtpr_ERA5-1440x721-CREG025'      ,         1     , 'mtpr'    ,   .true.     , .false., 'yearly'  , '' , '' , ''
+   sn_snow     = 'msr_ERA5-1440x721-CREG025'       ,         1     , 'msr'     ,   .true.     , .false., 'yearly'  , '' , '' , ''
+   sn_tdif     = ''                                ,        24     , ''        ,   .true.     , .false., 'yearly'  , '' , '' , ''
 
    cn_dir      = './'      !  root directory for the location of the bulk files
    ln_taudif   = .false.   !  HF tau contribution: use "mean of stress module - module of the mean stress" data
@@ -513,7 +513,7 @@
                         !     0: Shine & Henderson-Sellers (JGR 1985)
                         !     1: "home made" based on Brandt et al. (J. Climate 2005)
                         !                         and Grenfell & Perovich (JGR 2004)
-   rn_albice   =  0.58  !  albedo of bare puddled ice (values from 0.49 to 0.58)
+   rn_albice   =  0.53  !  albedo of bare puddled ice (values from 0.49 to 0.58)
                         !     0.53 (default) => if nn_ice_alb=0
                         !     0.50 (default) => if nn_ice_alb=1
 /

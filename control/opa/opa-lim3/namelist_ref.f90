@@ -513,7 +513,7 @@
                         !     0: Shine & Henderson-Sellers (JGR 1985)
                         !     1: "home made" based on Brandt et al. (J. Climate 2005)
                         !                         and Grenfell & Perovich (JGR 2004)
-   rn_albice   =  0.58  !  albedo of bare puddled ice (values from 0.49 to 0.58)
+   rn_albice   =  0.53  !  albedo of bare puddled ice (values from 0.49 to 0.58)
                         !     0.53 (default) => if nn_ice_alb=0
                         !     0.50 (default) => if nn_ice_alb=1
 /
