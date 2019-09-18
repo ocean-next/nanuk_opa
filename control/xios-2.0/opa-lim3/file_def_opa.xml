@@ -101,7 +101,7 @@
   <!--  ####################   3D fields saved at daily frequency ################################ -->
 
   <file_group id="1d" output_freq="1d" split_freq="1mo" output_level="10" enabled=".TRUE."> <!-- 1d files -->
-    
+
     <!-- ########    T-GRID    ########  -->
     <file id="file11" name_suffix="_gridT" description="ocean T grid variables" >
       <field field_ref="toce"         name="votemper"       long_name="sea_water_potential_temperature"                   />

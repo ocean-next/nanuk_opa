@@ -5,7 +5,7 @@
     =                                         put the variables you want...                                    =
     
                           MIND EVERYTHING between "{....}" !!!! Need to be parsed before use !!!
-
+                            Why "{" and not "<" ? because "<" is something part of XML, (screws up syntax highlighting in editors)
     ============================================================================================================
 -->
 
@@ -24,7 +24,7 @@
       <field field_ref="sst"          name="sst" />
       <field field_ref="sss"          name="sss" />
       <field field_ref="ssh"          name="ssh"            long_name="sea_surface_height_above_geoid"                    />
-      <field field_ref="ice_cover"    name="ice_cover"      long_name="sea-ice fraction as received from neXtSIM"         />   <!-- LB -->
+      <field field_ref="ice_cover"    name="siconc"         long_name="sea-ice fraction as received from neXtSIM"         />   <!-- LB -->
       <field field_ref="mldkz5"       name="mldkz5"         long_name="Turbocline depth (Kz = 5e-4)"                      />
       <field field_ref="mldr10_1"     name="mldr10_1"       long_name="Mixed Layer Depth (dsigma = 0.01 wrt 10m)"         />
       <field field_ref="botpres"      name="botpres"        long_name="Pressure at sea floor"                             />
