@@ -17,7 +17,7 @@ FREQ_RESTARTS=1 ; # frequency of restarts in months
 
 i_skip_link_restarts=0
 
-. ${HOME}/DEV/nemo_conf_manager/misc/lb_functions.sh
+. ./lb_functions.sh
 
 ltide=false
 
@@ -88,11 +88,8 @@ echo
 i_copy_forcing_to_scratch=0
 
 if [ ${IDEBUG} -eq 1 ]; then
-    #MPP
+    #
     ## We use specific fully dedicated node(s) for xios procs if NNODES_XIO > 0:
-    #
-    #
-    #   W I T H O U T   M E D   S E A  :
     #
     # 2 OPA nodes with 1 xios on each:
     #NCORES_OPA=54; NXO=6 ; NYO=10; NPROC_OPA_P_NODE=27
@@ -120,64 +117,6 @@ if [ ${IDEBUG} -eq 1 ]; then
     #NNODES_XIO=0 ;                   NPROC_XIO_P_NODE=1
     #NCORES_NXS=28 ; QUEUE="mpi_7";   NPROC_NXS_P_NODE=28
     #
-    #
-    #
-    #
-    #   W I T H   M E D   S E A  :
-    #
-    # 1 OPA node with 1 xios on it:
-    #QUEUE="mpi_2"
-    #NCORES_OPA=27; NXO=3 ; NYO=9 ; NPROC_OPA_P_NODE=27
-    #NCORES_NXS=28 ;                NPROC_NXS_P_NODE=28
-    #NNODES_XIO=0 ;                 NPROC_XIO_P_NODE=1
-    #
-    # 2 OPA nodes with 1 xios on each:
-    #NCORES_OPA=54; NXO=12 ; NYO=5; NPROC_OPA_P_NODE=27
-    #NNODES_XIO=0 ;                 NPROC_XIO_P_NODE=1
-    #NCORES_NXS=28 ; QUEUE="mpi_3"; NPROC_NXS_P_NODE=28
-    #NCORES_NXS=56 ; QUEUE="mpi_4"; NPROC_NXS_P_NODE=28
-    #NCORES_NXS=84 ; QUEUE="mpi_5"; NPROC_NXS_P_NODE=28
-    #
-    # 3 OPA nodes with 1 xios on each:
-    #NCORES_OPA=81; NXO=6 ; NYO=15; NPROC_OPA_P_NODE=27
-    #NNODES_XIO=0 ;                 NPROC_XIO_P_NODE=1
-    #NCORES_NXS=28 ; QUEUE="mpi_4"; NPROC_NXS_P_NODE=28
-    #NCORES_NXS=56 ; QUEUE="mpi_5"; NPROC_NXS_P_NODE=28
-    #NCORES_NXS=84 ;  QUEUE="mpi_6" ; NPROC_NXS_P_NODE=28
-    #NCORES_NXS=112 ;  QUEUE="mpi_7" ; NPROC_NXS_P_NODE=28
-    #
-    # 5 OPA nodes with 1 xios on each:
-    #NCORES_OPA=135; NXO=9 ; NYO=18; NPROC_OPA_P_NODE=27
-    #NNODES_XIO=0 ;                  NPROC_XIO_P_NODE=1
-    #NCORES_NXS=28 ;  QUEUE="mpi_6" ; NPROC_NXS_P_NODE=28
-    #NCORES_NXS=56 ;  QUEUE="mpi_7" ; NPROC_NXS_P_NODE=28
-    #NCORES_NXS=84 ;  QUEUE="mpi_8" ; NPROC_NXS_P_NODE=28
-    #NCORES_NXS=112 ;  QUEUE="mpi_9" ; NPROC_NXS_P_NODE=28
-    #NCORES_NXS=140 ; QUEUE="mpi_10"; NPROC_NXS_P_NODE=28
-    #
-    # 6 OPA nodes with 1 xios on each:
-    #NCORES_OPA=162; NXO=10 ; NYO=20; NPROC_OPA_P_NODE=27
-    #NNODES_XIO=0 ;                   NPROC_XIO_P_NODE=1
-    #NCORES_NXS=84 ;  QUEUE="mpi_9" ; NPROC_NXS_P_NODE=28
-    #NCORES_NXS=112 ; QUEUE="mpi_10"; NPROC_NXS_P_NODE=28
-    #NCORES_NXS=140 ; QUEUE="mpi_11"; NPROC_NXS_P_NODE=28
-    #
-    # 8 OPA nodes with 1 xios on each:
-    #NCORES_OPA=216; NXO=13 ; NYO=21; NPROC_OPA_P_NODE=27
-    #NNODES_XIO=0 ;                   NPROC_XIO_P_NODE=1
-    #NCORES_NXS=112 ; QUEUE="mpi_12"; NPROC_NXS_P_NODE=28
-    #NCORES_NXS=140 ; QUEUE="mpi_13"; NPROC_NXS_P_NODE=28
-    #NCORES_NXS=168 ; QUEUE="mpi_14"; NPROC_NXS_P_NODE=28
-    #NCORES_NXS=196 ; QUEUE="mpi_15"; NPROC_NXS_P_NODE=28
-    #
-    # 11 OPA nodes with 1 xios on each:
-    #NCORES_OPA=297; NXO=15 ; NYO=26; NPROC_OPA_P_NODE=27
-    #NNODES_XIO=0 ;                   NPROC_XIO_P_NODE=1
-    #NCORES_NXS=84 ;  QUEUE="mpi_14" ; NPROC_NXS_P_NODE=28 ;# 3 nodes
-    #NCORES_NXS=112 ; QUEUE="mpi_15"; NPROC_NXS_P_NODE=28  ;# 4 nodes
-    #NCORES_NXS=140 ; QUEUE="mpi_16"; NPROC_NXS_P_NODE=28  ;# 5 nodes
-    #NCORES_NXS=168 ; QUEUE="mpi_17"; NPROC_NXS_P_NODE=28  ;# 6 nodes
-    #NCORES_NXS=196 ; QUEUE="mpi_18"; NPROC_NXS_P_NODE=28  ;# 7 nodes
     #
     #
     #

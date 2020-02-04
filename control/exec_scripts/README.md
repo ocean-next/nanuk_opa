@@ -29,3 +29,6 @@ In order to work and find all the **template** config files and namelists,``NANU
     ./Namelists/opa/field_def_opa.xml 
     ./Namelists/opa/file_def_opa.xml 
 
+``lb_functions.sh`` is sourced by ``NANUK025-ILBOXE53.sh`` and contains some useful functions (bash)...
+
+
