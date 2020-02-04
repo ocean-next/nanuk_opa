@@ -18,33 +18,14 @@ it will run in the background and will wait for the current simulation segment t
 
 In order to work and find all the template config files and namelists,``NANUK025-ILBOXE53.sh`` expects the following subdirectory/file structure into the `Namelists` directory to look like this:
 
-`./Namelists/nxs/cpl_run.cfg` 
+    ./Namelists/iodef.xml 
+    ./Namelists/namcouple
 
-`./Namelists/opa/namelist_cfg` 
-`./Namelists/opa/namelist_ref` 
-`./Namelists/opa/domain_def_opa.xml` 
-`./Namelists/opa/field_def_opa.xml` 
-`./Namelists/opa/file_def_opa.xml` 
+    ./Namelists/nxs/cpl_run.cfg
 
-`./Namelists/iodef.xml` 
-`./Namelists/namcouple`
-
-
-
-
-
-
-
-./nxs 
-./nxs/cpl_run.cfg 
-./opa/domain_def_opa.xml 
-./opa/namelist_cfg 
-./opa/namelist_cfg.normal ./nxs 
-./nxs/cpl_run.cfg 
-./opa/domain_def_opa.xml 
-./opa/namelist_cfg 
-./opa/namelist_cfg.normal 
-./opa/namelist_ref 
-./namcouple./opa/namelist_ref 
-./namcouple
+    ./Namelists/opa/namelist_cfg 
+    ./Namelists/opa/namelist_ref 
+    ./Namelists/opa/domain_def_opa.xml 
+    ./Namelists/opa/field_def_opa.xml 
+    ./Namelists/opa/file_def_opa.xml 
 
