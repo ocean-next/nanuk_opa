@@ -40,8 +40,8 @@
    cn_ocerst_out = 'restart_oce'
    cn_ocerst_outdir = '<CN_OCERST_OUTDIR>'      !  directory in which to write output ocean restarts
    nn_istate   =   0    !  output the initial state (1) or not (0)
-   nn_stock    =   35040   !1Y at dt=900  frequency of creation of a restart file (modulo referenced to 1)
-   nn_write    =   35040   !1Y at dt=900  frequency of write in the output file   (modulo referenced to nn_it000)
+   nn_stock    =  2976 ! frequency of creation of a restart file (modulo referenced to 1)
+   nn_write    =  2976 ! frequency of write in the output file   (modulo referenced to nn_it000)
    ln_dimgnnn  = .false.   !  DIMG file format: 1 file for all processors (F) or by processor (T)
    ln_mskland  = .false.   !  mask land points in NetCDF outputs (costly: + ~15%)
    ln_cfmeta   = .false.   !  output additional data to netCDF files required for compliance with the CF metadata standard
@@ -162,8 +162,10 @@
 !-----------------------------------------------------------------------
 !          !  file name                   ! frequency (hours) ! variable  ! time interp. !  clim  ! 'yearly'/ ! weights  ! rotation ! land/sea mask !
 !          !                              !  (if <0  months)  !   name    !   (logical)  !  (T/F) ! 'monthly' ! filename ! pairing  ! filename      !
-   sn_tem_ini  = 'woa09_temperature01_monthly_1deg_t_an_CMA_drowned_Ex_L75' ,     -1    ,  't_an'   ,    .false.   , .true. , 'yearly'   , 'reshape_WOA09_REG1toCREG025_bilin.nc'  ,   ''    ,    ''
-   sn_sal_ini  = 'woa09_salinity01_monthly_1deg_s_an_CMA_drowned_Ex_L75'    ,     -1    ,  's_an'   ,    .false.   , .true. , 'yearly'   , 'reshape_WOA09_REG1toCREG025_bilin.nc'  ,   ''    ,    ''
+!   sn_tem_ini  = 'woa09_temperature01_monthly_1deg_t_an_CMA_drowned_Ex_L75' ,     -1    ,  't_an'   ,    .false.   , .true. , 'yearly'   , 'reshape_WOA09_REG1toCREG025_bilin.nc'  ,   ''    ,    ''
+!   sn_sal_ini  = 'woa09_salinity01_monthly_1deg_s_an_CMA_drowned_Ex_L75'    ,     -1    ,  's_an'   ,    .false.   , .true. , 'yearly'   , 'reshape_WOA09_REG1toCREG025_bilin.nc'  ,   ''    ,    ''
+   sn_tem_ini  = 'woa09_temperature_monthly_1deg_t_an_CMA_drowned_Ex_L75.nc' ,     -1    ,  't_an'   ,    .true.   , .true. , 'yearly'   , 'reshape_WOA09_REG1toCREG025_bilin.nc'  ,   ''    ,    ''
+   sn_sal_ini  = 'woa09_salinity_monthly_1deg_s_an_CMA_drowned_Ex_L75.nc'    ,     -1    ,  's_an'   ,    .true.   , .true. , 'yearly'   , 'reshape_WOA09_REG1toCREG025_bilin.nc'  ,   ''    ,    ''
    !
    ! data used for damping ( tradmp)
    sn_tem_dmp  = 'woa09_temperature_monthly_1deg_t_an_CMA_drowned_Ex_L75' ,    -12     ,  't_an'   ,    .true.   , .true. , 'yearly'   , 'reshape_WOA09_REG1toCREG025_bilin.nc'  ,   ''    ,    ''
@@ -449,6 +451,7 @@
    bn_v3d  =   'ORCA025.L75-GJM189-CREG025.L75-BDY_south_V'   ,  -1   , 'vomecrty' ,     .true.     , .false. ,  'yearly'  ,    ''    ,   ''     ,     ''
    bn_tem  =   'ORCA025.L75-GJM189-CREG025.L75-BDY_south_T'   ,  -1   , 'votemper' ,     .true.     , .false. ,  'yearly'  ,    ''    ,   ''     ,     ''
    bn_sal  =   'ORCA025.L75-GJM189-CREG025.L75-BDY_south_S'   ,  -1   , 'vosaline' ,     .true.     , .false. ,  'yearly'  ,    ''    ,   ''     ,     ''
+   !
    cn_dir  =    './BDY/'
    ln_full_vel = .true.
 /
@@ -738,8 +741,8 @@
                            !        = 1 add a tke source below the ML
                            !        = 2 add a tke source just at the base of the ML
                            !        = 3 as = 1 applied on HF part of the stress    ("key_oasis3")
-   rn_efr      =   0.05    !  fraction of surface tke value which penetrates below the ML (nn_etau=1 or 2)
-   nn_htau     =   1       !  type of exponential decrease of tke penetration below the ML
+   rn_efr      =   0.01    !LOLO  fraction of surface tke value which penetrates below the ML (nn_etau=1 or 2)
+   nn_htau     =   2       !LOLO  type of exponential decrease of tke penetration below the ML
                            !        = 0  constant 10 m length scale
                            !        = 1  0.5m at the equator to 30m poleward of 40 degrees
                            !        = 2  0.5m at the equator to 10m poleward of 40 degrees
