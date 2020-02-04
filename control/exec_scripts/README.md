@@ -16,7 +16,7 @@ As soon as ``NANUK025-ILBOXE53.sh`` works well, it is possible to launch it in t
 
 it will run in the background and will wait for the current simulation segment to have completed successfully and will then keep on resubmitting new simulation segments... 
 
-In order to work and find all the template config files and namelists,``NANUK025-ILBOXE53.sh`` expects the following subdirectory/file structure into the `Namelists` directory to look like this:
+In order to work and find all the **template** config files and namelists,``NANUK025-ILBOXE53.sh`` expects the following subdirectory/file structure into the `Namelists` directory to look like this:
 
     ./Namelists/iodef.xml 
     ./Namelists/namcouple
