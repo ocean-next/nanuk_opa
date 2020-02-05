@@ -1,0 +1,15 @@
+NETCDF_INCDIR="-I${NETCDF_DIR}/include"
+NETCDF_LIBDIR="-L${NETCDF_DIR}/lib"
+NETCDF_LIB="-lnetcdff -lnetcdf"
+
+MPI_INCDIR=
+MPI_LIBDIR=
+MPI_LIB="-lcurl"
+
+HDF5_INCDIR="-I${NETCDF_DIR}/include"
+HDF5_LIBDIR="-L${NETCDF_DIR}/lib"
+HDF5_LIB="-lhdf5_hl -lhdf5 -lz"
+
+OASIS_INCDIR="-I/home3/datahome/lbrodeau/DEV/oasis3-mct_gcc/build/lib/psmile.MPI1"
+OASIS_LIBDIR="-L/home3/datahome/lbrodeau/DEV/oasis3-mct_gcc/lib"
+OASIS_LIB="-lpsmile.MPI1 -lscrip -lmct -lmpeu"
